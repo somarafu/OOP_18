@@ -40,35 +40,35 @@ st.set_page_config(
 # ──────────────────────────────────────────────────
 st.markdown("""
 <style>
-.stApp { background-color: #ffffff; color: #1f2328; }
+.stApp { background-color: #FFFFFF; color: #111827; }
 
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #f6f8fa 0%, #ffffff 100%);
-    border-right: 1px solid #d0d7de;
+    background: linear-gradient(180deg, #F8FBFF 0%, #FFFFFF 100%);
+    border-right: 1px solid #DDE5F0;
 }
-[data-testid="stSidebar"] .stSlider > div { color: #1f2328; }
+[data-testid="stSidebar"] .stSlider > div { color: #111827; }
 
 [data-testid="stSidebar"] label,
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] span {
-    color: #1f2328 !important;
+    color: #111827 !important;
 }
 
 .metric-card {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #F8FBFF;
+    border: 1px solid #DDE5F0;
     border-radius: 12px;
     padding: 20px 24px;
     text-align: center;
     transition: border-color 0.2s;
 }
-.metric-card:hover { border-color: #0969da; }
+.metric-card:hover { border-color: #8BB8FF; }
 .metric-card .label {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #656d76;
+    color: #4B5563;
     margin-bottom: 8px;
 }
 .metric-card .value {
@@ -79,80 +79,80 @@ st.markdown("""
 }
 .metric-card .sub {
     font-size: 12px;
-    color: #656d76;
+    color: #4B5563;
 }
-.metric-good  { color: #1a7f37; }
-.metric-warn  { color: #5B5F00; }
-.metric-danger{ color: #cf222e; }
-.metric-blue  { color: #0969da; }
-.metric-purple{ color: #8250df; }
+.metric-good  { color: #A8E6CF; }
+.metric-warn  { color: #7A6CCF; }
+.metric-danger{ color: #FF9FB2; }
+.metric-blue  { color: #8BB8FF; }
+.metric-purple{ color: #CDB4DB; }
 
 .section-header {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #656d76;
+    color: #4B5563;
     padding: 8px 0 4px;
-    border-bottom: 1px solid #d0d7de;
+    border-bottom: 1px solid #DDE5F0;
     margin-bottom: 12px;
 }
 
 .alert-danger {
-    background: rgba(207, 34, 46, 0.08);
-    border: 1px solid rgba(207, 34, 46, 0.3);
-    border-left: 4px solid #cf222e;
+    background: rgba(255, 209, 220, 0.38);
+    border: 1px solid rgba(255, 209, 220, 0.75);
+    border-left: 4px solid #FF9FB2;
     border-radius: 8px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #82071e;
+    color: #7F1D1D;
     font-size: 14px;
 }
 .alert-success {
-    background: rgba(26, 127, 55, 0.08);
-    border: 1px solid rgba(26, 127, 55, 0.3);
-    border-left: 4px solid #1a7f37;
+    background: rgba(200, 247, 220, 0.32);
+    border: 1px solid rgba(200, 247, 220, 0.70);
+    border-left: 4px solid #A8E6CF;
     border-radius: 8px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #0f5323;
+    color: #14532D;
     font-size: 14px;
 }
 .alert-info {
-    background: rgba(9, 105, 218, 0.08);
-    border: 1px solid rgba(9, 105, 218, 0.3);
-    border-left: 4px solid #0969da;
+    background: rgba(191, 215, 255, 0.28);
+    border: 1px solid rgba(191, 215, 255, 0.65);
+    border-left: 4px solid #8BB8FF;
     border-radius: 8px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #0550ae;
+    color: #2F4A7C;
     font-size: 14px;
 }
 
 .stTabs [data-baseweb="tab-list"] {
-    background: #f6f8fa;
-    border-bottom: 1px solid #d0d7de;
+    background: #F8FBFF;
+    border-bottom: 1px solid #DDE5F0;
     gap: 4px;
 }
 .stTabs [data-baseweb="tab"] {
-    color: #656d76;
+    color: #4B5563;
     font-weight: 600;
     font-size: 13px;
     padding: 8px 16px;
 }
 .stTabs [aria-selected="true"] {
-    color: #1f2328 !important;
-    border-bottom: 2px solid #0969da;
+    color: #111827 !important;
+    border-bottom: 2px solid #8BB8FF;
 }
 
 /* 프로젝트 소개 탭 전용 디자인 */
 .intro-hero {
-    background: linear-gradient(135deg, #0969da 0%, #8250df 100%);
+    background: linear-gradient(135deg, #8BB8FF 0%, #CDB4DB 100%);
     border-radius: 22px;
     padding: 34px 38px;
-    color: white;
+    color: #111827;
     margin-bottom: 24px;
-    box-shadow: 0 16px 38px rgba(9,105,218,0.20);
+    box-shadow: 0 16px 38px rgba(191,215,255,0.38);
 }
 .intro-hero .eyebrow {
     font-size: 13px;
@@ -161,18 +161,21 @@ st.markdown("""
     text-transform: uppercase;
     opacity: 0.85;
     margin-bottom: 10px;
+    color: #111827;
 }
 .intro-hero .title {
     font-size: 34px;
     font-weight: 900;
     line-height: 1.25;
     margin-bottom: 12px;
+    color: #111827;
 }
 .intro-hero .subtitle {
     font-size: 16px;
     line-height: 1.75;
     opacity: 0.95;
     max-width: 980px;
+    color: #111827;
 }
 .intro-pills {
     display: flex;
@@ -187,12 +190,12 @@ st.markdown("""
     padding: 8px 13px;
     font-size: 13px;
     font-weight: 700;
-    color: white;
+    color: #111827;
 }
 
 .info-card {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
+    background: #FFFFFF;
+    border: 1px solid #DDE5F0;
     border-radius: 18px;
     padding: 22px 24px;
     box-shadow: 0 8px 22px rgba(27,31,36,0.06);
@@ -201,29 +204,29 @@ st.markdown("""
 .info-card h3 {
     font-size: 20px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 12px;
 }
 .info-card p {
     font-size: 14px;
     line-height: 1.75;
-    color: #57606a;
+    color: #374151;
 }
 .info-card .big-quote {
     font-size: 20px;
     line-height: 1.65;
     font-weight: 900;
-    color: #0969da;
-    background: #ddf4ff;
-    border-left: 5px solid #0969da;
+    color: #8BB8FF;
+    background: #EAF4FF;
+    border-left: 5px solid #8BB8FF;
     border-radius: 12px;
     padding: 16px 18px;
     margin: 14px 0;
 }
 
 .mini-card {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #F8FBFF;
+    border: 1px solid #DDE5F0;
     border-radius: 16px;
     padding: 18px 18px;
     height: 100%;
@@ -235,18 +238,18 @@ st.markdown("""
 .mini-card .title {
     font-size: 16px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 7px;
 }
 .mini-card .desc {
     font-size: 13px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.6;
 }
 
 .scenario-card {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
+    background: #FFFFFF;
+    border: 1px solid #DDE5F0;
     border-radius: 14px;
     padding: 16px 18px;
     margin-bottom: 10px;
@@ -262,54 +265,54 @@ st.markdown("""
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #F8FBFF;
+    border: 1px solid #DDE5F0;
 }
 .scenario-card-title {
     font-size: 15px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 3px;
 }
 .scenario-card-desc {
     font-size: 13px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.55;
 }
 
 .check-card {
-    background: #f0fff4;
-    border: 1px solid #aceebb;
+    background: #F3FFF8;
+    border: 1px solid #BEEED0;
     border-radius: 14px;
     padding: 14px 16px;
     margin-bottom: 10px;
-    color: #0f5323;
+    color: #14532D;
     font-size: 14px;
     font-weight: 700;
 }
 
 .source-card {
-    background: #FEF9C3;
-    border: 1px solid #FDE68A;
+    background: #FFF7CC;
+    border: 1px solid #FFE7A3;
     border-radius: 14px;
     padding: 16px 18px;
     margin-bottom: 10px;
 }
 .source-card .source-title {
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     font-size: 14px;
     margin-bottom: 4px;
 }
 .source-card .source-desc {
-    color: #57606a;
+    color: #374151;
     font-size: 13px;
     line-height: 1.55;
 }
 
 .flow-box {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #F8FBFF;
+    border: 1px solid #DDE5F0;
     border-radius: 18px;
     padding: 22px;
     margin-top: 18px;
@@ -324,8 +327,8 @@ st.markdown("""
     min-width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #0969da;
-    color: white;
+    background: #8BB8FF;
+    color: #111827;
     font-size: 13px;
     font-weight: 900;
     display: flex;
@@ -334,11 +337,11 @@ st.markdown("""
 }
 .flow-text {
     font-size: 14px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.6;
 }
 .flow-text b {
-    color: #1f2328;
+    color: #111827;
 }
 
 /* ===== 표 가독성 보정: 파스텔 배경 + 검정 글씨 ===== */
@@ -366,22 +369,22 @@ st.markdown("""
 # 색상 팔레트
 # ──────────────────────────────────────────────────
 COLORS = {
-    'bg':       '#ffffff',
+    'bg':       '#FFFFFF',
     'surface':  '#f8fbff',
-    'border':   '#dbeafe',
+    'border':   '#DDEBFF',
     'text':     '#111827',
     'muted':    '#4b5563',
 
     # 파스텔톤 색상 팔레트
-    'blue':     '#A7C7E7',
-    'green':    '#B7E4C7',
-    'yellow':   '#FFF3B0',
-    'red':      '#FFC9C9',
-    'purple':   '#D8B4FE',
-    'cyan':     '#BDE0FE',
+    'blue':     '#BFD7FF',
+    'green':    '#C8F7DC',
+    'yellow':   '#FFF0B3',
+    'red':      '#FFD1DC',
+    'purple':   '#E6D6FF',
+    'cyan':     '#C7F2F2',
 
-    'districts': ['#A7C7E7', '#B7E4C7', '#FFF3B0', '#D8B4FE', '#FFC9C9'],
-    'scenarios': ['#A7C7E7', '#B7E4C7', '#FFF3B0', '#D8B4FE', '#BDE0FE'],
+    'districts': ['#BFD7FF', '#C8F7DC', '#FFF0B3', '#E6D6FF', '#FFD1DC'],
+    'scenarios': ['#BFD7FF', '#C8F7DC', '#FFF0B3', '#E6D6FF', '#C7F2F2'],
 }
 
 PLOT_LAYOUT = dict(
@@ -390,7 +393,7 @@ PLOT_LAYOUT = dict(
     font=dict(color=COLORS['text'], family='Inter, sans-serif', size=12),
     margin=dict(l=16, r=16, t=36, b=16),
     legend=dict(
-        bgcolor='rgba(246,248,250,0.9)',
+        bgcolor='rgba(255,255,255,0.94)',
         bordercolor=COLORS['border'],
         borderwidth=1,
         font=dict(size=11, color=COLORS['text']),
@@ -666,7 +669,7 @@ def chart_need_radar(result, resource):
         r=need_scores + [need_scores[0]],
         theta=NEED_LABELS + [NEED_LABELS[0]],
         fill='toself',
-        fillcolor='rgba(56,139,253,0.15)',
+        fillcolor='rgba(191,215,255,0.36)',
         line=dict(color=COLORS['blue'], width=2),
         marker=dict(size=6, color=COLORS['blue']),
         name='니즈 충족도',
@@ -724,10 +727,10 @@ def chart_energy_gauge(rate):
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
             steps=[
-                dict(range=[0,40],  color='rgba(248,81,73,0.15)'),
-                dict(range=[40,60], color='rgba(255,243,176,0.45)'),
-                dict(range=[60,80], color='rgba(56,139,253,0.15)'),
-                dict(range=[80,100],color='rgba(63,185,80,0.15)'),
+                dict(range=[0,40],  color='rgba(255,209,220,0.38)'),
+                dict(range=[40,60], color='rgba(255,240,179,0.46)'),
+                dict(range=[60,80], color='rgba(191,215,255,0.36)'),
+                dict(range=[80,100],color='rgba(200,247,220,0.38)'),
             ],
             threshold=dict(
                 line=dict(color=COLORS['text'], width=2),
@@ -736,7 +739,7 @@ def chart_energy_gauge(rate):
             ),
         ),
         title=dict(
-            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
+            text='에너지 자립률<br><span style="font-size:11px;color:#4B5563">목표: 83.13% (세종시)</span>',
             font=dict(size=14, color=COLORS['text'])
         ),
     ))
@@ -885,7 +888,7 @@ def chart_nonlinear_curve():
         mode='lines',
         line=dict(color=COLORS['blue'], width=2.5),
         fill='tozeroy',
-        fillcolor='rgba(56,139,253,0.08)',
+        fillcolor='rgba(191,215,255,0.24)',
         name='충족도 곡선',
         hovertemplate='예산 %{x:.1f}% → 충족도 %{y:.1f}점<extra></extra>',
     ))
@@ -1010,17 +1013,17 @@ def chart_district_heatmap(results_dict):
         x=d_labels,
         y=scenarios,
         colorscale=[
-            [0.0, '#F8FBFF'],
-            [0.25, '#EFF6FF'],
-            [0.50, '#DBEAFE'],
-            [0.75, '#BFDBFE'],
-            [1.0, '#A7C7E7'],
+            [0.0, '#FBFDFF'],
+            [0.25, '#F3F8FF'],
+            [0.50, '#EAF4FF'],
+            [0.75, '#DDEBFF'],
+            [1.0, '#BFD7FF'],
         ],
         zmin=40,
         zmax=80,
         text=[[f'{v:.1f}' for v in row] for row in z],
         texttemplate='%{text}',
-        textfont=dict(size=11, color='black'),
+        textfont=dict(size=11, color=COLORS['text']),
         hovertemplate='시나리오: %{y}<br>구역: %{x}<br>만족도: %{z:.1f}점<extra></extra>',
         colorbar=dict(
             title=dict(text='점수', font=dict(color=COLORS['text'])),
@@ -1051,9 +1054,9 @@ with st.sidebar:
     st.markdown(
         '<div style="text-align:center;padding:16px 0 8px">'
         '<span style="font-size:28px">🏙️</span><br>'
-        '<span style="font-size:16px;font-weight:800;color:#1f2328">'
+        '<span style="font-size:16px;font-weight:800;color:#111827">'
         'NOVA시 시뮬레이터</span><br>'
-        '<span style="font-size:11px;color:#656d76">'
+        '<span style="font-size:11px;color:#4B5563">'
         'Smart City Resource Allocator</span></div>',
         unsafe_allow_html=True
     )
@@ -1241,7 +1244,7 @@ if run_btn:
 st.markdown(
     '<h1 style="font-size:28px;font-weight:800;margin-bottom:4px">'
     '🏙️ NOVA시 스마트시티 자원 배분 시뮬레이터</h1>'
-    '<p style="color:#7d8590;font-size:14px;margin-top:0">'
+    '<p style="color:#4B5563;font-size:14px;margin-top:0">'
     '"기술이 아니라 배분이 도시의 수준을 결정한다"  ·  '
     'Social Science & AI융합학부 OOP 프로젝트</p>',
     unsafe_allow_html=True
@@ -1259,22 +1262,22 @@ if st.session_state.result is None:
         st.markdown("""
 <div style="text-align:center;padding:60px 0">
     <div style="font-size:64px;margin-bottom:24px">🏙️</div>
-    <div style="font-size:20px;font-weight:700;color:#1f2328;margin-bottom:12px">
+    <div style="font-size:20px;font-weight:700;color:#111827;margin-bottom:12px">
         시뮬레이션을 시작하세요
     </div>
-    <div style="font-size:14px;color:#656d76;line-height:1.8">
+    <div style="font-size:14px;color:#4B5563;line-height:1.8">
         왼쪽 패널에서 프리셋 시나리오를 선택하거나 예산과 에너지 배분 비율을 직접 설정하고<br>
-        <b style="color:#0969da">▶ 시뮬레이션 실행</b> 버튼을 누르면<br>
+        <b style="color:#8BB8FF">▶ 시뮬레이션 실행</b> 버튼을 누르면<br>
         NOVA시 5개 구역의 시민 만족도가 실시간으로 산출됩니다.
     </div>
     <div style="margin-top:32px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
-        <div style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px 20px;font-size:13px;color:#656d76">
+        <div style="background:#F8FBFF;border:1px solid #DDE5F0;border-radius:8px;padding:12px 20px;font-size:13px;color:#4B5563">
             💰 예산: 복지·교육·에너지·인프라·안전
         </div>
-        <div style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px 20px;font-size:13px;color:#656d76">
+        <div style="background:#F8FBFF;border:1px solid #DDE5F0;border-radius:8px;padding:12px 20px;font-size:13px;color:#4B5563">
             ⚡ 에너지: 태양광·수소·ESS·외부전력망
         </div>
-        <div style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px 20px;font-size:13px;color:#656d76">
+        <div style="background:#F8FBFF;border:1px solid #DDE5F0;border-radius:8px;padding:12px 20px;font-size:13px;color:#4B5563">
             📊 출력: 5개 구역 만족도 + 자립률
         </div>
     </div>
@@ -1459,13 +1462,13 @@ with tab1:
         s = float(row['만족도'].replace('점',''))
 
         if s < 50:
-            c = '#FFE4E6'   # 파스텔 레드
+            c = '#FFEAF0'   # 파스텔 레드
         elif s < 60:
-            c = '#FEF9C3'   # 파스텔 옐로우
+            c = '#FFF7CC'   # 파스텔 옐로우
         elif s < 75:
-            c = '#DBEAFE'   # 파스텔 블루
+            c = '#EAF4FF'   # 파스텔 블루
         else:
-            c = '#DCFCE7'   # 파스텔 그린
+            c = '#E8FBEF'   # 파스텔 그린
 
         return [f'background-color:{c}; color:#111827; font-weight:600;'] * len(row)
 
@@ -1474,24 +1477,24 @@ with tab1:
           .apply(color_row, axis=1)
           .set_properties(**{
               'color': '#111827',
-              'border-color': '#dbeafe',
+              'border-color': '#DDEBFF',
               'font-weight': '600'
           })
           .set_table_styles([
               {
                   'selector': 'th',
                   'props': [
-                      ('background-color', '#EFF6FF'),
+                      ('background-color', '#F3F8FF'),
                       ('color', '#111827'),
                       ('font-weight', '800'),
-                      ('border-color', '#dbeafe')
+                      ('border-color', '#DDEBFF')
                   ]
               },
               {
                   'selector': 'td',
                   'props': [
                       ('color', '#111827'),
-                      ('border-color', '#dbeafe')
+                      ('border-color', '#DDEBFF')
                   ]
               }
           ]),
@@ -1571,26 +1574,26 @@ with tab2:
     st.dataframe(
         compare_df.style
           .set_properties(**{
-              'background-color': '#F8FBFF',
+              'background-color': '#FBFDFF',
               'color': '#111827',
-              'border-color': '#dbeafe',
+              'border-color': '#DDEBFF',
               'font-weight': '600'
           })
           .set_table_styles([
               {
                   'selector': 'th',
                   'props': [
-                      ('background-color', '#EFF6FF'),
+                      ('background-color', '#F3F8FF'),
                       ('color', '#111827'),
                       ('font-weight', '800'),
-                      ('border-color', '#dbeafe')
+                      ('border-color', '#DDEBFF')
                   ]
               },
               {
                   'selector': 'td',
                   'props': [
                       ('color', '#111827'),
-                      ('border-color', '#dbeafe')
+                      ('border-color', '#DDEBFF')
                   ]
               }
           ]),
@@ -1634,7 +1637,7 @@ with tab3:
             mode='lines',
             line=dict(color=COLORS['yellow'], width=2.5),
             fill='tozeroy',
-            fillcolor='rgba(255,243,176,0.35)',
+            fillcolor='rgba(255,240,179,0.36)',
             hovertemplate='자립률 %{x:.1f}% → 보정 %{y:+.1f}점<extra></extra>',
         ))
 
@@ -1702,24 +1705,24 @@ with tab3:
 
     st.markdown("""
 <div style="background:#161b22;border:1px solid #21262d;border-radius:10px;padding:20px 24px;font-family:monospace;font-size:13px;color:#e6edf3;line-height:1.8">
-<span style="color:#bc8cff">Citizen</span> (부모 클래스) — IMD 5개 니즈 벡터 기반<br>
-<span style="color:#7d8590">├──</span> <span style="color:#3fb950">Worker</span>      모빌리티(0.38) + 기회(0.27) 중시<br>
-<span style="color:#7d8590">├──</span> <span style="color:#3fb950">Student</span>     교육(0.37) + 활동(0.28) 중시<br>
-<span style="color:#7d8590">├──</span> <span style="color:#3fb950">Caregiver</span>   건강·안전(0.38) + 거버넌스(0.22) 중시<br>
-<span style="color:#7d8590">├──</span> <span style="color:#3fb950">Unemployed</span>  기회(0.42) + 거버넌스(0.25) 중시<br>
-<span style="color:#7d8590">└──</span> <span style="color:#3fb950">Elder</span>       건강·안전(0.42) + 모빌리티(0.25) 중시<br>
+<span style="color:#CDB4DB">Citizen</span> (부모 클래스) — IMD 5개 니즈 벡터 기반<br>
+<span style="color:#4B5563">├──</span> <span style="color:#A8E6CF">Worker</span>      모빌리티(0.38) + 기회(0.27) 중시<br>
+<span style="color:#4B5563">├──</span> <span style="color:#A8E6CF">Student</span>     교육(0.37) + 활동(0.28) 중시<br>
+<span style="color:#4B5563">├──</span> <span style="color:#A8E6CF">Caregiver</span>   건강·안전(0.38) + 거버넌스(0.22) 중시<br>
+<span style="color:#4B5563">├──</span> <span style="color:#A8E6CF">Unemployed</span>  기회(0.42) + 거버넌스(0.25) 중시<br>
+<span style="color:#4B5563">└──</span> <span style="color:#A8E6CF">Elder</span>       건강·안전(0.42) + 모빌리티(0.25) 중시<br>
 <br>
-<span style="color:#bc8cff">EnergySource</span> (부모 클래스) — generate() 다형성<br>
-<span style="color:#7d8590">├──</span> <span style="color:#388bfd">SolarPanel</span>    실효율 70% · 저비용<br>
-<span style="color:#7d8590">├──</span> <span style="color:#388bfd">HydrogenCell</span>  실효율 90% · 24시간 안정<br>
-<span style="color:#7d8590">├──</span> <span style="color:#388bfd">ESS</span>           충방전 효율 60% · 태양광 보완<br>
-<span style="color:#7d8590">└──</span> <span style="color:#388bfd">ExternalGrid</span>  자립률 기여 0%<br>
+<span style="color:#CDB4DB">EnergySource</span> (부모 클래스) — generate() 다형성<br>
+<span style="color:#4B5563">├──</span> <span style="color:#8BB8FF">SolarPanel</span>    실효율 70% · 저비용<br>
+<span style="color:#4B5563">├──</span> <span style="color:#8BB8FF">HydrogenCell</span>  실효율 90% · 24시간 안정<br>
+<span style="color:#4B5563">├──</span> <span style="color:#8BB8FF">ESS</span>           충방전 효율 60% · 태양광 보완<br>
+<span style="color:#4B5563">└──</span> <span style="color:#8BB8FF">ExternalGrid</span>  자립률 기여 0%<br>
 <br>
-<span style="color:#A78BFA">District</span>         구역 단위 만족도 계산 (4단계 파이프라인)<br>
-<span style="color:#A78BFA">Resource</span>         예산 배분 + <span style="color:#58a6ff">__add__</span> 절감액 재배분<br>
-<span style="color:#A78BFA">EnergyGrid</span>       자립률 계산 + 선순환 절감액 산출<br>
-<span style="color:#A78BFA">City</span>             5개 구역 통합 정책 적용<br>
-<span style="color:#A78BFA">PolicySimulator</span>  시나리오 실행 및 비교
+<span style="color:#CDB4DB">District</span>         구역 단위 만족도 계산 (4단계 파이프라인)<br>
+<span style="color:#CDB4DB">Resource</span>         예산 배분 + <span style="color:#8BB8FF">__add__</span> 절감액 재배분<br>
+<span style="color:#CDB4DB">EnergyGrid</span>       자립률 계산 + 선순환 절감액 산출<br>
+<span style="color:#CDB4DB">City</span>             5개 구역 통합 정책 적용<br>
+<span style="color:#CDB4DB">PolicySimulator</span>  시나리오 실행 및 비교
 </div>
     """, unsafe_allow_html=True)
 
@@ -1773,7 +1776,7 @@ with tab4:
 
         st.markdown("""
 <div class="flow-box">
-    <h3 style="margin-top:0;font-size:20px;font-weight:900;color:#1f2328;">🔄 시뮬레이션 흐름</h3>
+    <h3 style="margin-top:0;font-size:20px;font-weight:900;color:#111827;">🔄 시뮬레이션 흐름</h3>
     <div class="flow-step">
         <div class="flow-num">1</div>
         <div class="flow-text"><b>예산 배분 입력</b><br>복지, 교육, 에너지 인프라, 일반 인프라, 안전 비율을 설정합니다.</div>
@@ -1825,8 +1828,8 @@ with tab4:
             <div class="scenario-card-desc">모든 항목을 비교적 고르게 배분하여 극단적 위험 구역을 줄이는 안정형 전략입니다.</div>
         </div>
     </div>
-    <div class="scenario-card" style="border-color:#d8b4fe;background:#faf5ff;">
-        <div class="scenario-badge" style="background:#f3e8ff;">⭐</div>
+    <div class="scenario-card" style="border-color:#DCD2FF;background:#FBF8FF;">
+        <div class="scenario-badge" style="background:#F3EDFF;">⭐</div>
         <div>
             <div class="scenario-card-title">선순환 최적</div>
             <div class="scenario-card-desc">예산 만족도와 에너지 자립률을 동시에 높이는 최적화된 정책 조합입니다.</div>
