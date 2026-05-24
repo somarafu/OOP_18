@@ -547,29 +547,56 @@ def chart_need_radar(result, resource):
         name='니즈 충족도',
         hovertemplate='<b>%{theta}</b><br>%{r:.1f}점<extra></extra>',
     ))
-    fig.update_layout(
-        **PLOT_LAYOUT,
-        title=dict(text='5개 니즈 충족도', font=dict(size=14, color=COLORS['text'])),
-        polar=dict(
-            bgcolor='rgba(0,0,0,0)',
-            radialaxis=dict(range=[0, 100], gridcolor=COLORS['border'], tickfont=dict(color=COLORS['text'], size=10)),
-            angularaxis=dict(gridcolor=COLORS['border'], tickfont=dict(color=COLORS['text'], size=12)),
-        ),
-        height=340,
-        showlegend=False,
-    )
-    return fig
 
+    radar_layout = {
+        **PLOT_LAYOUT,
+        'title': dict(text='5개 니즈 충족도', font=dict(size=14, color=COLORS['text'])),
+        'polar': dict(
+            domain=dict(x=[0.13, 0.87], y=[0.05, 0.92]),
+            bgcolor='rgba(0,0,0,0)',
+            radialaxis=dict(
+                range=[0, 100],
+                gridcolor=COLORS['border'],
+                tickfont=dict(color=COLORS['text'], size=10)
+            ),
+            angularaxis=dict(
+                gridcolor=COLORS['border'],
+                tickfont=dict(color=COLORS['text'], size=12)
+            ),
+        ),
+        'height': 390,
+        'margin': dict(l=95, r=115, t=58, b=58),
+        'showlegend': False,
+    }
+    fig.update_layout(**radar_layout)
+    return fig
 
 def chart_energy_gauge(rate):
     color = COLORS['red'] if rate < 0.40 else COLORS['yellow'] if rate < 0.60 else COLORS['blue'] if rate < 0.80 else COLORS['green']
+    delta_color = '#1A7F37' if rate >= 0.40 else '#CF222E'
+
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
+        domain=dict(x=[0.04, 0.84], y=[0.0, 1.0]),
         number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
-        delta=dict(reference=40, valueformat='.1f', font=dict(size=20, color=COLORS['text']), increasing=dict(color='#1A7F37'), decreasing=dict(color='#CF222E')),
+        delta=dict(
+            reference=40,
+            valueformat='.1f',
+            font=dict(size=20, color=delta_color),
+            increasing=dict(color='#1A7F37'),
+            decreasing=dict(color='#CF222E')
+        ),
         gauge=dict(
-            axis=dict(range=[0, 100], tickwidth=1, tickcolor=COLORS['text'], tickfont=dict(color=COLORS['text'], size=10)),
+            axis=dict(
+                range=[0, 100],
+                tickmode='array',
+                tickvals=[0, 20, 40, 60, 80, 100],
+                ticktext=['0', '20', '40', '60', '80', '100'],
+                tickwidth=1,
+                tickcolor=COLORS['text'],
+                tickfont=dict(color=COLORS['text'], size=10)
+            ),
             bar=dict(color=color, thickness=0.25),
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
@@ -581,11 +608,19 @@ def chart_energy_gauge(rate):
             ],
             threshold=dict(line=dict(color=COLORS['text'], width=2), thickness=0.75, value=83.13),
         ),
-        title=dict(text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>', font=dict(size=14, color=COLORS['text'])),
+        title=dict(
+            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
+            font=dict(size=14, color=COLORS['text'])
+        ),
     ))
-    fig.update_layout(**PLOT_LAYOUT, height=280)
-    return fig
 
+    gauge_layout = {
+        **PLOT_LAYOUT,
+        'height': 300,
+        'margin': dict(l=36, r=130, t=58, b=22),
+    }
+    fig.update_layout(**gauge_layout)
+    return fig
 
 def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
     labels = ['복지', '교육', '에너지\n인프라', '일반\n인프라', '안전']
