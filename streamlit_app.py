@@ -305,7 +305,9 @@ st.markdown("""
 [data-testid="stMarkdownContainer"],
 [data-testid="stMarkdownContainer"] table,
 [data-testid="stMarkdownContainer"] table * {
-    color: #111827 !important;
+    background-color: #1f2328 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 /* Plotly SVG 텍스트 색상 보정 */
