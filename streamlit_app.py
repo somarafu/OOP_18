@@ -1079,7 +1079,7 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
         <div class="sim-hero">
             <div class="sim-hero-grid">
                 <div>
-                    <div class="sim-hero-title">🎮 NOVA시 게임형 정책 시뮬레이션</div>
+                    <div class="sim-hero-title"> NOVA시 게임형 정책 시뮬레이션</div>
                     <div class="sim-hero-desc">
                         왼쪽에서 설정한 예산과 에너지 배분이 A~E구역의 시설, 주민 반응,
                         만족도 댓글로 어떻게 나타나는지 게임 화면처럼 보여줍니다.
