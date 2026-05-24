@@ -1215,7 +1215,7 @@ st.markdown(
     '🏙️ NOVA시 스마트시티 자원 배분 시뮬레이터</h1>'
     '<p style="color:#7d8590;font-size:14px;margin-top:0">'
     '"기술이 아니라 배분이 도시의 수준을 결정한다"  ·  '
-    'Social Science & AI 융합학부 OOP 프로젝트</p>',
+    'Social Science & AI융합학부 OOP 프로젝트</p>',
     unsafe_allow_html=True
 )
 
@@ -1831,7 +1831,7 @@ with tab4:
     <h3>👩‍💻 프로젝트 정보</h3>
     <p>
         <b>학교</b> 한국외국어대학교<br>
-        <b>전공</b> Social Science & AI 융합학부<br>
+        <b>전공</b> Social Science & AI융합학부<br>
         <b>과목</b> 객체지향형 프로그래밍<br>
         <b>핵심 주제</b> 스마트시티 자원 배분과 시민 만족도 시뮬레이션
     </p>
