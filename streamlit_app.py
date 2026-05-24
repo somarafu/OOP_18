@@ -208,7 +208,7 @@ st.markdown("""
     height: 100%;
 }
 .info-card h3 { font-size: 20px; font-weight: 900; color: #1f2328; margin-bottom: 12px; }
-.info-card p { font-size: 14px; line-height: 1.75; color: #57606a; }
+.info-card p { font-size: 14px; line-height: 1.75; color: #1f2328; }
 .info-card .big-quote {
     font-size: 20px;
     line-height: 1.65;
@@ -229,7 +229,7 @@ st.markdown("""
 }
 .mini-card .icon { font-size: 28px; margin-bottom: 8px; }
 .mini-card .title { font-size: 16px; font-weight: 900; color: #1f2328; margin-bottom: 7px; }
-.mini-card .desc { font-size: 13px; color: #57606a; line-height: 1.6; }
+.mini-card .desc { font-size: 13px; color: #1f2328; line-height: 1.6; }
 .scenario-card {
     background: #ffffff;
     border: 1px solid #d0d7de;
@@ -252,7 +252,7 @@ st.markdown("""
     border: 1px solid #d0d7de;
 }
 .scenario-card-title { font-size: 15px; font-weight: 900; color: #1f2328; margin-bottom: 3px; }
-.scenario-card-desc { font-size: 13px; color: #57606a; line-height: 1.55; }
+.scenario-card-desc { font-size: 13px; color: #1f2328; line-height: 1.55; }
 .check-card {
     background: #f0fff4;
     border: 1px solid #aceebb;
@@ -271,7 +271,7 @@ st.markdown("""
     margin-bottom: 10px;
 }
 .source-card .source-title { font-weight: 900; color: #1f2328; font-size: 14px; margin-bottom: 4px; }
-.source-card .source-desc { color: #57606a; font-size: 13px; line-height: 1.55; }
+.source-card .source-desc { color: #1f2328; font-size: 13px; line-height: 1.55; }
 .flow-box {
     background: #f6f8fa;
     border: 1px solid #d0d7de;
@@ -292,8 +292,35 @@ st.markdown("""
     align-items: center;
     justify-content: center;
 }
-.flow-text { font-size: 14px; color: #57606a; line-height: 1.6; }
+.flow-text { font-size: 14px; color: #1f2328; line-height: 1.6; }
 .flow-text b { color: #1f2328; }
+
+/* ===== 시각화/표 글씨 가독성 보정: 검정색 고정 ===== */
+[data-testid="stDataFrame"],
+[data-testid="stDataFrame"] *,
+[data-testid="stTable"],
+[data-testid="stTable"] *,
+[data-testid="stMetric"],
+[data-testid="stMetric"] *,
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] table,
+[data-testid="stMarkdownContainer"] table * {
+    color: #111827 !important;
+}
+
+/* Plotly SVG 텍스트 색상 보정 */
+.js-plotly-plot .plotly text,
+.js-plotly-plot .main-svg text,
+.js-plotly-plot .legend text,
+.js-plotly-plot .gtitle,
+.js-plotly-plot .xtick text,
+.js-plotly-plot .ytick text,
+.js-plotly-plot .angularaxistick text,
+.js-plotly-plot .radialaxistick text,
+.js-plotly-plot .annotation-text {
+    fill: #111827 !important;
+    color: #111827 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -318,7 +345,7 @@ PLOT_LAYOUT = dict(
         bgcolor='rgba(246,248,250,0.9)',
         bordercolor=COLORS['border'],
         borderwidth=1,
-        font=dict(size=11),
+        font=dict(size=11, color=COLORS['text']),
     ),
 )
 
@@ -464,7 +491,7 @@ def chart_district_bar(result):
         line_color=COLORS['red'],
         line_width=1.5,
         annotation_text='위험 임계치 (50점)',
-        annotation_font_color=COLORS['red'],
+        annotation_font_color=COLORS['text'],
         annotation_font_size=11,
     )
     fig.add_hline(
@@ -473,7 +500,7 @@ def chart_district_bar(result):
         line_color=COLORS['green'],
         line_width=1,
         annotation_text='우수 기준 (75점)',
-        annotation_font_color=COLORS['green'],
+        annotation_font_color=COLORS['text'],
         annotation_font_size=11,
     )
     avg = result['city_average']
@@ -483,14 +510,14 @@ def chart_district_bar(result):
         line_color=COLORS['purple'],
         line_width=2,
         annotation_text=f'도시 평균 {avg:.1f}점',
-        annotation_font_color=COLORS['purple'],
+        annotation_font_color=COLORS['text'],
         annotation_font_size=12,
         annotation_position='bottom right',
     )
     fig.update_layout(
         **PLOT_LAYOUT,
         title=dict(text='구역별 시민 만족도', font=dict(size=14, color=COLORS['text'])),
-        yaxis=dict(range=[30, 100], gridcolor=COLORS['border'], gridwidth=0.5, tickfont=dict(color=COLORS['muted'])),
+        yaxis=dict(range=[30, 100], gridcolor=COLORS['border'], gridwidth=0.5, tickfont=dict(color=COLORS['text'])),
         xaxis=dict(tickfont=dict(size=12, color=COLORS['text'])),
         height=340,
     )
@@ -517,7 +544,7 @@ def chart_need_radar(result, resource):
         title=dict(text='5개 니즈 충족도', font=dict(size=14, color=COLORS['text'])),
         polar=dict(
             bgcolor='rgba(0,0,0,0)',
-            radialaxis=dict(range=[0, 100], gridcolor=COLORS['border'], tickfont=dict(color=COLORS['muted'], size=10)),
+            radialaxis=dict(range=[0, 100], gridcolor=COLORS['border'], tickfont=dict(color=COLORS['text'], size=10)),
             angularaxis=dict(gridcolor=COLORS['border'], tickfont=dict(color=COLORS['text'], size=12)),
         ),
         height=340,
@@ -531,10 +558,10 @@ def chart_energy_gauge(rate):
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
-        number=dict(suffix='%', font=dict(size=36, color=color)),
-        delta=dict(reference=40, valueformat='.1f', increasing=dict(color=COLORS['green']), decreasing=dict(color=COLORS['red'])),
+        number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
+        delta=dict(reference=40, valueformat='.1f', font=dict(size=20, color=COLORS['text']), increasing=dict(color='#1A7F37'), decreasing=dict(color='#CF222E')),
         gauge=dict(
-            axis=dict(range=[0, 100], tickwidth=1, tickcolor=COLORS['muted'], tickfont=dict(color=COLORS['muted'], size=10)),
+            axis=dict(range=[0, 100], tickwidth=1, tickcolor=COLORS['text'], tickfont=dict(color=COLORS['text'], size=10)),
             bar=dict(color=color, thickness=0.25),
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
@@ -560,7 +587,7 @@ def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
         labels=labels,
         values=values,
         marker=dict(colors=colors_pie, line=dict(color=COLORS['bg'], width=2)),
-        textfont=dict(size=12, color='white'),
+        textfont=dict(size=12, color=COLORS['text']),
         hovertemplate='<b>%{label}</b><br>%{value}%<extra></extra>',
         hole=0.45,
         pull=[0.03] * 5,
@@ -571,7 +598,7 @@ def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
             'title': dict(text='예산 배분 현황', font=dict(size=14, color=COLORS['text'])),
             'height': 280,
             'showlegend': True,
-            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11), bgcolor='rgba(0,0,0,0)'),
+            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11, color=COLORS['text']), bgcolor='rgba(0,0,0,0)'),
             'annotations': [dict(text=f'{sum(values)}%', x=0.5, y=0.5, showarrow=False, font=dict(size=16, color=COLORS['text'], family='Inter'))],
         }
     )
@@ -586,7 +613,7 @@ def chart_energy_pie(solar, hydrogen, ess, external):
         labels=labels,
         values=values,
         marker=dict(colors=colors_e, line=dict(color=COLORS['bg'], width=2)),
-        textfont=dict(size=12, color='white'),
+        textfont=dict(size=12, color=COLORS['text']),
         hovertemplate='<b>%{label}</b><br>%{value}%<extra></extra>',
         hole=0.45,
         pull=[0.03] * 4,
@@ -598,7 +625,7 @@ def chart_energy_pie(solar, hydrogen, ess, external):
             'title': dict(text='에너지원 구성', font=dict(size=14, color=COLORS['text'])),
             'height': 280,
             'showlegend': True,
-            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11), bgcolor='rgba(0,0,0,0)'),
+            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11, color=COLORS['text']), bgcolor='rgba(0,0,0,0)'),
             'annotations': [dict(text=f'자립<br>{self_rate:.0f}%', x=0.5, y=0.5, showarrow=False, font=dict(size=14, color=COLORS['text'], family='Inter'))],
         }
     )
@@ -964,6 +991,8 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     <style>
     * {{ box-sizing: border-box; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
     body {{ margin: 0; background: #ffffff; color: #1f2328; }}
+    .sim-root, .sim-root * {{ color: #1f2328; }}
+    .sim-applied-icon, .sim-facility-emoji, .sim-energy-icon {{ color: #ffffff !important; }}
     .sim-root {{ width: 100%; padding: 8px 4px 28px; }}
     .sim-hero {{ background: linear-gradient(135deg, #26364f 0%, #315f80 52%, #4b8f9f 100%); border-radius: 24px; padding: 24px 28px; color: white; margin-bottom: 16px; box-shadow: 0 14px 28px rgba(38,54,79,0.20); }}
     .sim-hero-grid {{ display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: center; }}
@@ -974,12 +1003,12 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     .sim-hero-row:last-child {{ border-bottom: none; }}
     .sim-hero-value {{ font-size: 16px; font-weight: 900; }}
     .sim-section-title {{ font-size: 22px; font-weight: 900; margin: 18px 0 6px; color: #1f2328; }}
-    .sim-section-sub {{ font-size: 13px; color: #57606a; line-height: 1.6; margin-bottom: 12px; }}
+    .sim-section-sub {{ font-size: 13px; color: #1f2328; line-height: 1.6; margin-bottom: 12px; }}
     .sim-village-scroll {{ width: 100%; overflow-x: auto; padding-bottom: 10px; margin-bottom: 22px; }}
     .sim-village-board {{ position: relative; width: 1500px; height: 1240px; border-radius: 30px; overflow: hidden; border: 1px solid #d0d7de; background: linear-gradient(180deg, #eaf5ff 0%, #eef8ff 22%, #edf7e6 55%, #dfeccd 100%); box-shadow: 0 16px 30px rgba(27,31,36,0.08); }}
     .sim-village-title-card {{ position: absolute; left: 24px; top: 24px; width: 340px; background: rgba(255,255,255,0.94); border: 1px solid #d0d7de; border-radius: 20px; padding: 14px 16px; box-shadow: 0 8px 18px rgba(27,31,36,0.07); z-index: 20; }}
     .sim-village-title {{ font-size: 21px; font-weight: 900; margin-bottom: 4px; }}
-    .sim-village-desc {{ font-size: 12px; color: #57606a; line-height: 1.5; }}
+    .sim-village-desc {{ font-size: 12px; color: #1f2328; line-height: 1.5; }}
     .sim-main-road {{ position: absolute; background: #7b8491; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15); z-index: 1; pointer-events: none; }}
     .sim-main-road::after {{ content: ""; position: absolute; left: 0; top: 50%; width: 1800px; border-top: 3px dashed rgba(255,255,255,0.72); }}
     .sim-road-1 {{ left: -100px; top: 620px; width: 1800px; height: 42px; transform: rotate(-6deg); }}
@@ -990,32 +1019,32 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     .sim-district-header {{ min-height: 70px; background: rgba(255,255,255,0.98); border: 1px solid #d0d7de; border-radius: 20px; display: grid; grid-template-columns: 50px 1fr; gap: 10px; align-items: center; padding: 10px 12px; box-shadow: 0 6px 12px rgba(27,31,36,0.05); flex-shrink: 0; }}
     .sim-district-icon {{ width: 46px; height: 46px; border-radius: 16px; background: #f6f8fa; display: flex; align-items: center; justify-content: center; font-size: 26px; }}
     .sim-district-title {{ font-size: 18px; font-weight: 900; margin-bottom: 3px; }}
-    .sim-district-desc {{ font-size: 12px; color: #57606a; line-height: 1.35; }}
+    .sim-district-desc {{ font-size: 12px; color: #1f2328; line-height: 1.35; }}
     .sim-applied-panel {{ min-height: 76px; background: rgba(255,255,255,0.96); border: 1px solid #d0d7de; border-radius: 18px; padding: 9px 10px; box-shadow: 0 5px 10px rgba(27,31,36,0.05); flex-shrink: 0; }}
-    .sim-panel-title {{ font-size: 11.5px; font-weight: 900; color: #57606a; margin-bottom: 7px; }}
+    .sim-panel-title {{ font-size: 11.5px; font-weight: 900; color: #1f2328; margin-bottom: 7px; }}
     .sim-applied-list {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }}
     .sim-applied-item {{ display: grid; grid-template-columns: 30px 1fr; gap: 7px; align-items: center; min-width: 0; background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 13px; padding: 6px 7px; }}
     .sim-applied-icon {{ width: 29px; height: 29px; border-radius: 10px; background: var(--item-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; }}
     .sim-applied-name {{ font-size: 11px; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
-    .sim-applied-sub {{ font-size: 9.5px; color: #6b7280; }}
+    .sim-applied-sub {{ font-size: 9.5px; color: #1f2328; }}
     .sim-district-scene {{ position: relative; height: 128px; background: rgba(255,255,255,0.44); border: 1px solid rgba(255,255,255,0.78); border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 10px; padding: 10px; flex-shrink: 0; }}
     .sim-scene-road {{ position: absolute; background: rgba(123,132,145,0.55); z-index: 1; pointer-events: none; }}
     .sim-scene-road::after {{ content: ""; position: absolute; left: 0; top: 50%; width: 600px; border-top: 2px dashed rgba(255,255,255,0.68); }}
     .sim-scene-road-a {{ left: -60px; top: 66px; width: 560px; height: 22px; transform: rotate(-6deg); }}
     .sim-scene-road-b {{ left: 190px; top: -40px; width: 22px; height: 220px; transform: rotate(10deg); }}
     .sim-scene-section {{ position: relative; z-index: 5; background: rgba(255,255,255,0.80); border: 1px solid #e5e7eb; border-radius: 16px; padding: 8px; }}
-    .sim-scene-label {{ font-size: 10.5px; font-weight: 900; color: #57606a; margin-bottom: 6px; }}
+    .sim-scene-label {{ font-size: 10.5px; font-weight: 900; color: #1f2328; margin-bottom: 6px; }}
     .sim-facility-grid, .sim-resident-grid {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }}
     .sim-resident-grid {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
     .sim-facility-item, .sim-resident-item {{ position: relative; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; min-height: 48px; text-align: center; padding: 5px 3px; box-shadow: 0 3px 7px rgba(27,31,36,0.05); }}
     .sim-resident-item {{ height: 39px; min-height: 39px; display: flex; align-items: center; justify-content: center; }}
     .sim-facility-emoji {{ width: 28px; height: 28px; margin: 0 auto 2px; border-radius: 10px; background: var(--item-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 17px; }}
-    .sim-facility-caption {{ font-size: 8.5px; font-weight: 800; color: #374151; line-height: 1.1; }}
+    .sim-facility-caption {{ font-size: 8.5px; font-weight: 800; color: #1f2328; line-height: 1.1; }}
     .sim-resident-person {{ font-size: 20px; }}
     .sim-resident-mood {{ position: absolute; right: -4px; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: #ffffff; border: 2px solid #d0d7de; display: flex; align-items: center; justify-content: center; font-size: 9px; box-shadow: 0 3px 7px rgba(27,31,36,0.10); }}
     .sim-comment-bubble {{ min-height: 62px; background: rgba(255,255,255,0.97); border: 1px solid #d0d7de; border-radius: 18px; padding: 11px 13px; box-shadow: 0 6px 13px rgba(27,31,36,0.06); flex-shrink: 0; }}
     .sim-comment-title {{ font-size: 14px; font-weight: 900; margin-bottom: 5px; }}
-    .sim-comment-text {{ font-size: 12px; color: #57606a; line-height: 1.4; }}
+    .sim-comment-text {{ font-size: 12px; color: #1f2328; line-height: 1.4; }}
     .sim-district-score {{ min-height: 66px; background: rgba(255,255,255,0.98); border: 1px solid #d0d7de; border-radius: 20px; display: grid; grid-template-columns: 46px 1fr 70px; gap: 10px; align-items: center; padding: 10px 12px; box-shadow: 0 6px 13px rgba(27,31,36,0.06); flex-shrink: 0; margin-top: auto; }}
     .sim-score-face {{ width: 42px; height: 42px; border-radius: 15px; background: #fff7ed; display: flex; align-items: center; justify-content: center; font-size: 25px; }}
     .sim-score-row {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }}
@@ -1033,7 +1062,7 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     .sim-energy-value {{ color: var(--item-color); font-size: 12px; font-weight: 900; }}
     .sim-energy-grid {{ display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; min-height: 84px; }}
     .sim-energy-object {{ background: #ffffff; border: 1px solid #e5e7eb; border-radius: 13px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 20px; }}
-    .sim-energy-empty {{ grid-column: 1 / -1; color: #8c959f; font-size: 12px; border: 1px dashed #d0d7de; border-radius: 13px; height: 82px; display: flex; align-items: center; justify-content: center; background: #ffffff; }}
+    .sim-energy-empty {{ grid-column: 1 / -1; color: #1f2328; font-size: 12px; border: 1px dashed #d0d7de; border-radius: 13px; height: 82px; display: flex; align-items: center; justify-content: center; background: #ffffff; }}
     @media (max-width: 900px) {{ .sim-hero-grid {{ grid-template-columns: 1fr; }} .sim-energy-field {{ grid-template-columns: 1fr; }} }}
     </style>
 
