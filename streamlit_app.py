@@ -50,6 +50,13 @@ st.markdown("""
 }
 [data-testid="stSidebar"] .stSlider > div { color: #1f2328; }
 
+/* 사이드바 글씨 선명하게 */
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span {
+    color: #1f2328 !important;
+}
+
 /* 메트릭 카드 */
 .metric-card {
     background: #f6f8fa;
@@ -126,67 +133,6 @@ st.markdown("""
     margin: 8px 0;
     color: #0550ae;
     font-size: 14px;
-}
-
-/* 배분 항목 시각화 카드 */
-.allocation-guide-card {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin: 10px 0 14px 0;
-}
-
-.allocation-guide-title {
-    font-size: 13px;
-    font-weight: 800;
-    color: #1f2328;
-    margin-bottom: 8px;
-}
-
-.allocation-guide-desc {
-    font-size: 12px;
-    color: #656d76;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
-
-.allocation-guide-row {
-    margin: 8px 0;
-}
-
-.allocation-guide-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: #1f2328;
-    margin-bottom: 3px;
-}
-
-.allocation-guide-label strong {
-    font-size: 12px;
-    color: #1f2328;
-}
-
-.allocation-bar-bg {
-    width: 100%;
-    height: 8px;
-    border-radius: 999px;
-    background: #eaeef2;
-    overflow: hidden;
-}
-
-.allocation-bar-fill {
-    height: 8px;
-    border-radius: 999px;
-}
-
-.allocation-guide-note {
-    font-size: 11px;
-    color: #656d76;
-    margin-top: 8px;
-    line-height: 1.5;
 }
 
 /* 탭 스타일 */
@@ -506,52 +452,43 @@ def chart_energy_pie(solar, hydrogen, ess, external):
     return fig
 
 
-def allocation_visual_card(title, desc, items, total):
+def render_allocation_bars(title, desc, items, total):
     """
-    사이드바에서 예산/에너지 배분 슬라이더 항목을 시각적으로 보여주는 HTML 카드.
+    사이드바에서 슬라이더로 조정하는 항목들을 Streamlit 기본 컴포넌트로 시각화한다.
+    HTML을 쓰지 않아서 <div> 코드가 화면에 그대로 뜨는 문제가 없다.
+
     items 형식:
     [
-        {"label": "복지", "value": welfare, "color": COLORS["green"], "desc": "의료·돌봄·취약계층"},
+        ("복지", welfare, "의료, 돌봄, 노인·취약계층 지원"),
         ...
     ]
     """
-    html = f"""
-    <div class="allocation-guide-card">
-        <div class="allocation-guide-title">{title}</div>
-        <div class="allocation-guide-desc">{desc}</div>
+    st.markdown(f"**{title}**")
+    st.caption(desc)
+
+    for label, value, explanation in items:
+        left, right = st.columns([0.7, 0.3])
+
+        with left:
+            st.write(f"**{label}**")
+        with right:
+            st.write(f"{value}%")
+
+        st.progress(value / 100)
+        st.caption(explanation)
+
+    if abs(total - 100) <= 1:
+        st.success(f"현재 합계: {total}% · 정상")
+    else:
+        st.error(f"현재 합계: {total}% · 100%가 되도록 조정 필요")
+
+
+def expected_energy_self_rate(solar, hydrogen, ess, external):
     """
-
-    for item in items:
-        label = item["label"]
-        value = item["value"]
-        color = item["color"]
-        item_desc = item.get("desc", "")
-
-        html += f"""
-        <div class="allocation-guide-row">
-            <div class="allocation-guide-label">
-                <span>{label}</span>
-                <strong>{value}%</strong>
-            </div>
-            <div class="allocation-bar-bg">
-                <div class="allocation-bar-fill" style="width:{min(value, 100)}%; background:{color};"></div>
-            </div>
-            <div style="font-size:11px;color:#656d76;margin-top:2px;">{item_desc}</div>
-        </div>
-        """
-
-    status_color = COLORS["green"] if abs(total - 100) <= 1 else COLORS["red"]
-    status_text = "정상" if abs(total - 100) <= 1 else "조정 필요"
-
-    html += f"""
-        <div class="allocation-guide-note">
-            현재 합계: <b style="color:{status_color}">{total}%</b> · {status_text}<br>
-            각 막대는 현재 슬라이더 값이 전체 100% 중 어느 정도인지 보여줍니다.
-        </div>
-    </div>
+    에너지 자립률 예상값.
+    외부전력망은 자립률에 기여하지 않으므로 0으로 계산한다.
     """
-
-    return html
+    return (solar * 0.7 + hydrogen * 0.9 + ess * 0.6 + external * 0.0) / 100
 
 
 def chart_nonlinear_curve():
@@ -705,45 +642,17 @@ with st.sidebar:
         st.markdown(f'<div class="alert-danger">합계: {budget_total}% ← 100%여야 합니다</div>',
                     unsafe_allow_html=True)
 
-    st.markdown(
-        allocation_visual_card(
-            title="예산 배분 조율 항목",
-            desc="아래 5개 항목은 시민 만족도를 바꾸는 예산 배분 변수입니다. 합계가 100%가 되도록 조정해야 합니다.",
-            items=[
-                {
-                    "label": "복지",
-                    "value": welfare,
-                    "color": COLORS["green"],
-                    "desc": "의료, 돌봄, 노인·취약계층 지원"
-                },
-                {
-                    "label": "교육",
-                    "value": education,
-                    "color": COLORS["blue"],
-                    "desc": "학교, 직업훈련, 청년 기회, 평생학습"
-                },
-                {
-                    "label": "에너지 인프라",
-                    "value": energy_infra,
-                    "color": COLORS["yellow"],
-                    "desc": "스마트그리드, 전기차 충전, 친환경 에너지 기반시설"
-                },
-                {
-                    "label": "일반 인프라",
-                    "value": general_infra,
-                    "color": COLORS["purple"],
-                    "desc": "도로, 대중교통, 생활SOC, 공원 등 도시 기반시설"
-                },
-                {
-                    "label": "안전",
-                    "value": safety,
-                    "color": COLORS["red"],
-                    "desc": "치안, 소방, 재난 대응, CCTV, 교통안전"
-                },
-            ],
-            total=budget_total
-        ),
-        unsafe_allow_html=True
+    render_allocation_bars(
+        title="예산 배분 조율 항목",
+        desc="아래 5개 항목은 시민 만족도를 바꾸는 예산 배분 변수입니다.",
+        items=[
+            ("복지", welfare, "의료, 돌봄, 노인·취약계층 지원"),
+            ("교육", education, "학교, 직업훈련, 청년 기회, 평생학습"),
+            ("에너지 인프라", energy_infra, "스마트그리드, 전기차 충전, 친환경 에너지 기반시설"),
+            ("일반 인프라", general_infra, "도로, 대중교통, 생활SOC, 공원 등 도시 기반시설"),
+            ("안전", safety, "치안, 소방, 재난 대응, CCTV, 교통안전"),
+        ],
+        total=budget_total
     )
 
     st.markdown('---')
@@ -767,51 +676,23 @@ with st.sidebar:
         st.markdown(f'<div class="alert-danger">합계: {energy_total}% ← 100%여야 합니다</div>',
                     unsafe_allow_html=True)
 
-    expected_self_rate = (solar * 0.7 + hydrogen * 0.9 + ess * 0.6) / 100
-
-    st.markdown(
-        allocation_visual_card(
-            title="에너지 배분 조율 항목",
-            desc="아래 4개 항목은 도시의 에너지 자립률을 결정하는 에너지원 구성 변수입니다. 합계가 100%가 되도록 조정해야 합니다.",
-            items=[
-                {
-                    "label": "태양광",
-                    "value": solar,
-                    "color": COLORS["yellow"],
-                    "desc": "설치 비용은 낮지만 날씨와 시간대의 영향을 받음"
-                },
-                {
-                    "label": "수소연료전지",
-                    "value": hydrogen,
-                    "color": COLORS["blue"],
-                    "desc": "안정적 발전이 가능하고 자립률 기여도가 큼"
-                },
-                {
-                    "label": "ESS",
-                    "value": ess,
-                    "color": COLORS["cyan"],
-                    "desc": "남는 전력을 저장해 태양광의 불안정성을 보완"
-                },
-                {
-                    "label": "외부전력망",
-                    "value": external,
-                    "color": COLORS["muted"],
-                    "desc": "안정적 공급은 가능하지만 에너지 자립률에는 기여하지 않음"
-                },
-            ],
-            total=energy_total
-        ),
-        unsafe_allow_html=True
+    render_allocation_bars(
+        title="에너지 배분 조율 항목",
+        desc="아래 4개 항목은 도시의 에너지 자립률을 결정하는 에너지원 구성 변수입니다.",
+        items=[
+            ("태양광", solar, "설치 비용은 낮지만 날씨와 시간대의 영향을 받음"),
+            ("수소연료전지", hydrogen, "안정적 발전이 가능하고 자립률 기여도가 큼"),
+            ("ESS", ess, "남는 전력을 저장해 태양광의 불안정성을 보완"),
+            ("외부전력망", external, "안정적 공급은 가능하지만 에너지 자립률에는 기여하지 않음"),
+        ],
+        total=energy_total
     )
 
-    st.markdown(
-        f"""
-        <div class="alert-info">
-            예상 에너지 자립률: <b>{expected_self_rate * 100:.1f}%</b><br>
-            계산식: 태양광×0.7 + 수소연료전지×0.9 + ESS×0.6 + 외부전력망×0.0
-        </div>
-        """,
-        unsafe_allow_html=True
+    predicted_rate = expected_energy_self_rate(solar, hydrogen, ess, external)
+
+    st.info(
+        f"예상 에너지 자립률: {predicted_rate * 100:.1f}%\n\n"
+        "계산식: 태양광×0.7 + 수소연료전지×0.9 + ESS×0.6 + 외부전력망×0.0"
     )
 
     st.markdown('---')
@@ -865,7 +746,7 @@ st.markdown(
     '🏙️ NOVA시 스마트시티 자원 배분 시뮬레이터</h1>'
     '<p style="color:#7d8590;font-size:14px;margin-top:0">'
     '"기술이 아니라 배분이 도시의 수준을 결정한다"  ·  '
-    'Social Science & AI 융합학부 OOP 프로젝트</p>',
+    'Social Science & AI융합학부 OOP 프로젝트</p>',
     unsafe_allow_html=True
 )
 st.markdown('---')
