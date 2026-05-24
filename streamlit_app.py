@@ -295,17 +295,16 @@ st.markdown("""
 .flow-text { font-size: 14px; color: #1f2328; line-height: 1.6; }
 .flow-text b { color: #1f2328; }
 
-/* ===== 시각화/표 글씨 가독성 보정: 검정색 고정 ===== */
-[data-testid="stDataFrame"],
-[data-testid="stDataFrame"] *,
-[data-testid="stTable"],
-[data-testid="stTable"] *,
-[data-testid="stMetric"],
-[data-testid="stMetric"] *,
-[data-testid="stMarkdownContainer"],
-[data-testid="stMarkdownContainer"] table,
-[data-testid="stMarkdownContainer"] table * {
-    color: #111827 !important;
+/* 표 헤더 배경/글씨 색상 조정 */
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] [role="columnheader"] *,
+[data-testid="stDataFrame"] thead,
+[data-testid="stDataFrame"] thead *,
+[data-testid="stDataFrame"] th,
+[data-testid="stDataFrame"] th * {
+    background-color: #1f2328 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 /* Plotly SVG 텍스트 색상 보정 */
@@ -320,56 +319,6 @@ st.markdown("""
 .js-plotly-plot .annotation-text {
     fill: #111827 !important;
     color: #111827 !important;
-}
-
-/* ===== 표 헤더 글씨 흰색 보정 ===== */
-[data-testid="stDataFrame"] [role="columnheader"],
-[data-testid="stDataFrame"] [role="columnheader"] *,
-[data-testid="stDataFrame"] thead,
-[data-testid="stDataFrame"] thead *,
-[data-testid="stDataFrame"] th,
-[data-testid="stDataFrame"] th * {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-
-/* ===== 구역별 상세 현황 커스텀 표 ===== */
-.custom-district-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    font-size: 15px;
-    border: 1px solid #d0d7de;
-}
-
-.custom-district-table thead tr {
-    background: #1f2328;
-}
-
-.custom-district-table th {
-    color: #ffffff !important;
-    background: #1f2328 !important;
-    padding: 14px 16px;
-    text-align: left;
-    font-weight: 800;
-    border-right: 1px solid #3a3f47;
-}
-
-.custom-district-table th:last-child {
-    border-right: none;
-}
-
-.custom-district-table td {
-    color: #111827 !important;
-    padding: 13px 16px;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(208, 215, 222, 0.45);
-}
-
-.custom-district-table tbody tr:last-child td {
-    border-bottom: none;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -614,30 +563,13 @@ def chart_need_radar(result, resource):
 
 def chart_energy_gauge(rate):
     color = COLORS['red'] if rate < 0.40 else COLORS['yellow'] if rate < 0.60 else COLORS['blue'] if rate < 0.80 else COLORS['green']
-    delta_color = '#1A7F37' if rate >= 0.40 else '#CF222E'
-
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
-        domain=dict(x=[0.04, 0.88], y=[0.0, 1.0]),
         number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
-        delta=dict(
-            reference=40,
-            valueformat='.1f',
-            font=dict(size=20, color=delta_color),
-            increasing=dict(color='#1A7F37'),
-            decreasing=dict(color='#CF222E')
-        ),
+        delta=dict(reference=40, valueformat='.1f', font=dict(size=20, color=COLORS['text']), increasing=dict(color='#1A7F37'), decreasing=dict(color='#CF222E')),
         gauge=dict(
-            axis=dict(
-                range=[0, 100],
-                tickmode='array',
-                tickvals=[0, 20, 40, 60, 80, 100],
-                ticktext=['0', '20', '40', '60', '80', '100'],
-                tickwidth=1,
-                tickcolor=COLORS['text'],
-                tickfont=dict(color=COLORS['text'], size=10)
-            ),
+            axis=dict(range=[0, 100], tickwidth=1, tickcolor=COLORS['text'], tickfont=dict(color=COLORS['text'], size=10)),
             bar=dict(color=color, thickness=0.25),
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
@@ -649,18 +581,10 @@ def chart_energy_gauge(rate):
             ],
             threshold=dict(line=dict(color=COLORS['text'], width=2), thickness=0.75, value=83.13),
         ),
-        title=dict(
-            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
-            font=dict(size=14, color=COLORS['text'])
-        ),
+        title=dict(text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>', font=dict(size=14, color=COLORS['text'])),
     ))
-
-    gauge_layout = {
-    **PLOT_LAYOUT,
-    'height': 280,
-    'margin': dict(l=16, r=95, t=50, b=16),
-    }
-    fig.update_layout(**gauge_layout)
+    fig.update_layout(**PLOT_LAYOUT, height=280)
+    return fig
 
 
 def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
@@ -1450,46 +1374,7 @@ with tab1:
         c = '#ffebe9' if s < 50 else '#dafbe1' if s >= 75 else '#ddf4ff'
         return [f'background-color:{c};color:#1f2328'] * len(row)
 
-    table_html = """
-<table class="custom-district-table">
-    <thead>
-        <tr>
-            <th>구역</th>
-            <th>만족도</th>
-            <th>평가</th>
-            <th>게이지</th>
-        </tr>
-    </thead>
-    <tbody>
-"""
-
-    for _, row in df.iterrows():
-        s = float(row['만족도'].replace('점', ''))
-
-        if s < 50:
-            bg = '#fff1f2'
-        elif s < 60:
-            bg = '#fffbeb'
-        elif s < 75:
-            bg = '#e5f5ff'
-        else:
-            bg = '#f0fdf4'
-
-        table_html += f"""
-        <tr style="background:{bg};">
-            <td>{row['구역']}</td>
-            <td>{row['만족도']}</td>
-            <td>{row['평가']}</td>
-            <td>{row['게이지']}</td>
-        </tr>
-        """
-
-    table_html += """
-    </tbody>
-</table>
-"""
-
-    st.markdown(table_html, unsafe_allow_html=True)
+    st.dataframe(df.style.apply(color_row, axis=1), use_container_width=True, hide_index=True)
 
 # ════════════════════════════════════════════════
 # TAB 2: 게임형 시뮬레이션
