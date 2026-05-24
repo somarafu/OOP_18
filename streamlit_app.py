@@ -1003,7 +1003,7 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     .sim-root, .sim-root * {{ color: #1f2328; }}
     .sim-applied-icon, .sim-facility-emoji, .sim-energy-icon {{ color: #ffffff !important; }}
     .sim-root {{ width: 100%; padding: 8px 4px 28px; }}
-    .sim-hero {{ background: linear-gradient(135deg, #26364f 0%, #315f80 52%, #4b8f9f 100%); border-radius: 24px; padding: 24px 28px; color: white; margin-bottom: 16px; box-shadow: 0 14px 28px rgba(38,54,79,0.20); }}
+    .sim-hero {{ background: linear-gradient(135deg, #AFC7E8 0%, #B9D9EA 52%, #C7E7E4 100%); border-radius: 24px; padding: 24px 28px; color: #1f2328; margin-bottom: 16px; box-shadow: 0 14px 28px rgba(91,121,153,0.18); }}
     .sim-hero-grid {{ display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: center; }}
     .sim-hero-title {{ font-size: 32px; font-weight: 900; line-height: 1.25; margin-bottom: 8px; }}
     .sim-hero-desc {{ font-size: 15px; line-height: 1.7; opacity: 0.95; }}
