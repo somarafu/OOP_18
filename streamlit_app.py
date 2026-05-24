@@ -40,212 +40,160 @@ st.set_page_config(
 # ──────────────────────────────────────────────────
 st.markdown("""
 <style>
-.stApp { background-color: #ffffff; color: #1f2328; }
+/* ─────────────────────────────────────────────
+   Pastel readable theme
+   - 표/도표 텍스트는 검정 계열 유지
+   - 배경과 차트 색은 파스텔 톤으로 완화
+   ───────────────────────────────────────────── */
+
+.stApp {
+    background-color: #fbfdff;
+    color: #111827;
+}
+
+/* Streamlit 기본 텍스트/표 글씨가 흐려지는 문제 방지 */
+html, body, [class*="css"], [data-testid="stMarkdownContainer"],
+[data-testid="stDataFrame"], [data-testid="stDataFrame"] * {
+    color: #111827;
+}
 
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #f6f8fa 0%, #ffffff 100%);
-    border-right: 1px solid #d0d7de;
+    background: linear-gradient(180deg, #f4f8ff 0%, #ffffff 100%);
+    border-right: 1px solid #d9e2ec;
 }
-[data-testid="stSidebar"] .stSlider > div { color: #1f2328; }
+[data-testid="stSidebar"] .stSlider > div { color: #111827; }
 
 [data-testid="stSidebar"] label,
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] span {
-    color: #1f2328 !important;
+    color: #111827 !important;
 }
 
+/* metric cards */
 .metric-card {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
-    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid #d9e2ec;
+    border-radius: 16px;
     padding: 20px 24px;
     text-align: center;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
 }
-.metric-card:hover { border-color: #0969da; }
+.metric-card:hover {
+    border-color: #9ec5ff;
+    transform: translateY(-1px);
+}
 .metric-card .label {
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #656d76;
+    color: #4b5563;
     margin-bottom: 8px;
 }
 .metric-card .value {
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 900;
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 .metric-card .sub {
     font-size: 12px;
-    color: #656d76;
+    color: #4b5563;
 }
-.metric-good  { color: #1a7f37; }
-.metric-warn  { color: #9a6700; }
-.metric-danger{ color: #cf222e; }
-.metric-blue  { color: #0969da; }
-.metric-purple{ color: #8250df; }
+.metric-good  { color: #2f7d52; }
+.metric-warn  { color: #9a6b16; }
+.metric-danger{ color: #b42318; }
+.metric-blue  { color: #3767b1; }
+.metric-purple{ color: #7b5bb7; }
 
 .section-header {
     font-size: 15px;
-    font-weight: 850;
+    font-weight: 900;
     letter-spacing: 0.02em;
     text-transform: none;
-    color: #1f2328;
+    color: #111827;
     padding: 10px 0 8px;
-    border-bottom: 2px solid #d6dee8;
+    border-bottom: 2px solid #d9e2ec;
     margin-bottom: 14px;
 }
 
-/* 표와 텍스트 가독성 보정 */
-[data-testid="stDataFrame"],
-[data-testid="stDataFrame"] * {
-    color: #111827 !important;
-}
-.table-card {
-    background: #ffffff;
-    border: 1px solid #d6dee8;
-    border-radius: 18px;
-    padding: 14px;
-    box-shadow: 0 10px 22px rgba(15,23,42,0.055);
-    overflow-x: auto;
-    margin-top: 8px;
-    margin-bottom: 18px;
-}
-.readable-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    overflow: hidden;
-    border-radius: 14px;
-    color: #111827;
-    font-size: 15px;
-}
-.readable-table thead th {
-    background: #eef4ff;
-    color: #111827 !important;
-    font-weight: 900;
-    text-align: left;
-    padding: 13px 16px;
-    border-bottom: 1px solid #d6dee8;
-    white-space: nowrap;
-}
-.readable-table tbody td {
-    color: #111827 !important;
-    padding: 13px 16px;
-    border-bottom: 1px solid #e7edf5;
-    font-weight: 650;
-}
-.readable-table tbody tr:last-child td {
-    border-bottom: none;
-}
-.row-danger td { background: #fff1f2; }
-.row-warn td { background: #fff7dc; }
-.row-good td { background: #eef7ff; }
-.row-excellent td { background: #ecfdf3; }
-.score-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 72px;
-    border-radius: 999px;
-    padding: 5px 10px;
-    font-size: 13px;
-    font-weight: 900;
-    color: #111827 !important;
-    border: 1px solid rgba(15,23,42,0.08);
-}
-.pill-danger { background: #fecdd3; }
-.pill-warn { background: #fde68a; }
-.pill-good { background: #bfdbfe; }
-.pill-excellent { background: #bbf7d0; }
-.gauge-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 170px;
-}
-.gauge-track {
-    flex: 1;
-    height: 10px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    overflow: hidden;
-}
-.gauge-fill {
-    height: 100%;
-    border-radius: 999px;
-}
-.gauge-value {
-    min-width: 36px;
-    text-align: right;
-    font-weight: 900;
-    color: #111827 !important;
-}
-
 .alert-danger {
-    background: rgba(207, 34, 46, 0.08);
-    border: 1px solid rgba(207, 34, 46, 0.3);
-    border-left: 4px solid #cf222e;
-    border-radius: 8px;
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-left: 5px solid #f4a6a6;
+    border-radius: 12px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #82071e;
+    color: #7f1d1d;
     font-size: 14px;
 }
 .alert-success {
-    background: rgba(26, 127, 55, 0.08);
-    border: 1px solid rgba(26, 127, 55, 0.3);
-    border-left: 4px solid #1a7f37;
-    border-radius: 8px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 5px solid #a7d8a3;
+    border-radius: 12px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #0f5323;
+    color: #14532d;
     font-size: 14px;
 }
 .alert-info {
-    background: rgba(9, 105, 218, 0.08);
-    border: 1px solid rgba(9, 105, 218, 0.3);
-    border-left: 4px solid #0969da;
-    border-radius: 8px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 5px solid #a8c7fa;
+    border-radius: 12px;
     padding: 12px 16px;
     margin: 8px 0;
-    color: #0550ae;
+    color: #1e3a8a;
     font-size: 14px;
 }
 
+/* tabs */
 .stTabs [data-baseweb="tab-list"] {
-    background: #f6f8fa;
-    border-bottom: 1px solid #d0d7de;
+    background: #f7f9fc;
+    border-bottom: 1px solid #d9e2ec;
     gap: 4px;
 }
 .stTabs [data-baseweb="tab"] {
-    color: #656d76;
-    font-weight: 600;
+    color: #374151 !important;
+    font-weight: 700;
     font-size: 13px;
     padding: 8px 16px;
 }
 .stTabs [aria-selected="true"] {
-    color: #1f2328 !important;
-    border-bottom: 2px solid #0969da;
+    color: #111827 !important;
+    border-bottom: 3px solid #8fb7ff;
+}
+
+/* dataframe readability */
+[data-testid="stDataFrame"] {
+    border-radius: 14px;
+    overflow: hidden;
+}
+[data-testid="stDataFrame"] div,
+[data-testid="stDataFrame"] span,
+[data-testid="stDataFrame"] td,
+[data-testid="stDataFrame"] th {
+    color: #111827 !important;
 }
 
 /* 프로젝트 소개 탭 전용 디자인 */
 .intro-hero {
-    background: linear-gradient(135deg, #eaf4ff 0%, #f3edff 100%);
+    background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 52%, #fce7f3 100%);
+    border: 1px solid #d9e2ec;
     border-radius: 22px;
     padding: 34px 38px;
     color: #111827;
     margin-bottom: 24px;
-    box-shadow: 0 16px 38px rgba(120,144,180,0.14);
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
 }
 .intro-hero .eyebrow {
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    opacity: 0.85;
+    color: #3767b1;
     margin-bottom: 10px;
 }
 .intro-hero .title {
@@ -253,11 +201,12 @@ st.markdown("""
     font-weight: 900;
     line-height: 1.25;
     margin-bottom: 12px;
+    color: #111827;
 }
 .intro-hero .subtitle {
     font-size: 16px;
     line-height: 1.75;
-    opacity: 0.95;
+    color: #374151;
     max-width: 980px;
 }
 .intro-pills {
@@ -267,49 +216,49 @@ st.markdown("""
     margin-top: 20px;
 }
 .intro-pill {
-    background: rgba(255,255,255,0.72);
-    border: 1px solid #d6dee8;
+    background: rgba(255,255,255,0.82);
+    border: 1px solid #d9e2ec;
     border-radius: 999px;
     padding: 8px 13px;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     color: #111827;
 }
 
 .info-card {
     background: #ffffff;
-    border: 1px solid #d0d7de;
+    border: 1px solid #d9e2ec;
     border-radius: 18px;
     padding: 22px 24px;
-    box-shadow: 0 8px 22px rgba(27,31,36,0.06);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
     height: 100%;
 }
 .info-card h3 {
     font-size: 20px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 12px;
 }
 .info-card p {
     font-size: 14px;
     line-height: 1.75;
-    color: #57606a;
+    color: #374151;
 }
 .info-card .big-quote {
     font-size: 20px;
     line-height: 1.65;
     font-weight: 900;
-    color: #0969da;
-    background: #ddf4ff;
-    border-left: 5px solid #0969da;
+    color: #1e3a8a;
+    background: #eff6ff;
+    border-left: 5px solid #a8c7fa;
     border-radius: 12px;
     padding: 16px 18px;
     margin: 14px 0;
 }
 
 .mini-card {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #f8fbff;
+    border: 1px solid #d9e2ec;
     border-radius: 16px;
     padding: 18px 18px;
     height: 100%;
@@ -321,18 +270,18 @@ st.markdown("""
 .mini-card .title {
     font-size: 16px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 7px;
 }
 .mini-card .desc {
     font-size: 13px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.6;
 }
 
 .scenario-card {
     background: #ffffff;
-    border: 1px solid #d0d7de;
+    border: 1px solid #d9e2ec;
     border-radius: 14px;
     padding: 16px 18px;
     margin-bottom: 10px;
@@ -348,54 +297,54 @@ st.markdown("""
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #f8fbff;
+    border: 1px solid #d9e2ec;
 }
 .scenario-card-title {
     font-size: 15px;
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     margin-bottom: 3px;
 }
 .scenario-card-desc {
     font-size: 13px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.55;
 }
 
 .check-card {
-    background: #f0fff4;
-    border: 1px solid #aceebb;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
     border-radius: 14px;
     padding: 14px 16px;
     margin-bottom: 10px;
-    color: #0f5323;
+    color: #14532d;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .source-card {
-    background: #fff8c5;
-    border: 1px solid #f0d66b;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
     border-radius: 14px;
     padding: 16px 18px;
     margin-bottom: 10px;
 }
 .source-card .source-title {
     font-weight: 900;
-    color: #1f2328;
+    color: #111827;
     font-size: 14px;
     margin-bottom: 4px;
 }
 .source-card .source-desc {
-    color: #57606a;
+    color: #374151;
     font-size: 13px;
     line-height: 1.55;
 }
 
 .flow-box {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
+    background: #f8fbff;
+    border: 1px solid #d9e2ec;
     border-radius: 18px;
     padding: 22px;
     margin-top: 18px;
@@ -410,8 +359,8 @@ st.markdown("""
     min-width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #0969da;
-    color: white;
+    background: #8fb7ff;
+    color: #111827;
     font-size: 13px;
     font-weight: 900;
     display: flex;
@@ -420,11 +369,11 @@ st.markdown("""
 }
 .flow-text {
     font-size: 14px;
-    color: #57606a;
+    color: #374151;
     line-height: 1.6;
 }
 .flow-text b {
-    color: #1f2328;
+    color: #111827;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -433,40 +382,42 @@ st.markdown("""
 # 색상 팔레트
 # ──────────────────────────────────────────────────
 COLORS = {
+    # 기본 UI 색
     'bg':       '#ffffff',
-    'surface':  '#f8fafc',
-    'border':   '#d6dee8',
+    'surface':  '#f8fbff',
+    'border':   '#d9e2ec',
     'text':     '#111827',
     'muted':    '#4b5563',
 
-    # 눈의 피로도를 낮추는 파스텔 톤 팔레트
-    'blue':     '#7aa7ff',
-    'green':    '#8bd6a3',
-    'yellow':   '#f4c76e',
-    'red':      '#f2a0a1',
-    'purple':   '#b69df2',
-    'cyan':     '#8edbd3',
+    # 파스텔 차트 색상
+    'blue':     '#8fb7ff',
+    'green':    '#a7d8a3',
+    'yellow':   '#f6d38b',
+    'red':      '#f4a6a6',
+    'purple':   '#cdb4db',
+    'cyan':     '#9ad7d9',
 
-    # 글씨·기준선용 진한 보조색
-    'blue_dark':   '#2563eb',
-    'green_dark':  '#166534',
-    'yellow_dark': '#92400e',
-    'red_dark':    '#991b1b',
-    'purple_dark': '#6d28d9',
+    # 진한 보조 텍스트/선 색상
+    'blue_dark':   '#3767b1',
+    'green_dark':  '#2f7d52',
+    'yellow_dark': '#9a6b16',
+    'red_dark':    '#b42318',
+    'purple_dark': '#7b5bb7',
 
-    'districts': ['#7aa7ff', '#8bd6a3', '#f4c76e', '#b69df2', '#f2a0a1'],
-    'scenarios': ['#9cc4ff', '#a7e3b8', '#ffd98a', '#c6b7ff', '#9ee3dc'],
+    'districts': ['#8fb7ff', '#a7d8a3', '#f6d38b', '#cdb4db', '#f4a6a6'],
+    'scenarios': ['#b7d4ff', '#bfe6c0', '#ffe2a8', '#d8c6f0', '#f8c6c6'],
 }
+
 PLOT_LAYOUT = dict(
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
     font=dict(color=COLORS['text'], family='Inter, sans-serif', size=12),
-    margin=dict(l=18, r=18, t=44, b=20),
+    margin=dict(l=16, r=16, t=42, b=18),
     legend=dict(
         bgcolor='rgba(255,255,255,0.96)',
         bordercolor=COLORS['border'],
         borderwidth=1,
-        font=dict(size=12, color=COLORS['text']),
+        font=dict(size=11, color=COLORS['text']),
     ),
 )
 
@@ -659,73 +610,6 @@ def score_label(score):
         return '양호'
     return '✅ 우수'
 
-
-# ──────────────────────────────────────────────────
-# HTML 표 렌더링 함수
-# ──────────────────────────────────────────────────
-def table_row_class(score):
-    if score < 50:
-        return 'row-danger', 'pill-danger', '#ef9a9a'
-    if score < 60:
-        return 'row-warn', 'pill-warn', '#f4c76e'
-    if score < 75:
-        return 'row-good', 'pill-good', '#7aa7ff'
-    return 'row-excellent', 'pill-excellent', '#8bd6a3'
-
-
-def render_readable_table(rows, columns, score_key=None, gauge_key=None, eval_key=None):
-    header_html = ''.join(f'<th>{html_lib.escape(str(col))}</th>' for col in columns)
-    body_html = []
-
-    for row in rows:
-        score_for_style = None
-        if score_key and score_key in row:
-            value = row[score_key]
-            if isinstance(value, str):
-                value = value.replace('점', '').replace('%', '')
-            try:
-                score_for_style = float(value)
-            except Exception:
-                score_for_style = None
-
-        row_cls, pill_cls, gauge_color = table_row_class(score_for_style if score_for_style is not None else 65)
-
-        cell_html = []
-        for col in columns:
-            raw = row.get(col, '')
-            value = html_lib.escape(str(raw))
-
-            if eval_key and col == eval_key:
-                value = f'<span class="score-pill {pill_cls}">{value}</span>'
-
-            if gauge_key and col == gauge_key:
-                try:
-                    gauge_value = int(float(str(raw).replace('점', '').replace('%', '')))
-                except Exception:
-                    gauge_value = 0
-                gauge_value = max(0, min(100, gauge_value))
-                value = (
-                    f'<div class="gauge-wrap">'
-                    f'<div class="gauge-track"><div class="gauge-fill" '
-                    f'style="width:{gauge_value}%; background:{gauge_color};"></div></div>'
-                    f'<div class="gauge-value">{gauge_value}</div>'
-                    f'</div>'
-                )
-
-            cell_html.append(f'<td>{value}</td>')
-
-        body_html.append(f'<tr class="{row_cls}">{"".join(cell_html)}</tr>')
-
-    table_html = (
-        '<div class="table-card">'
-        '<table class="readable-table">'
-        f'<thead><tr>{header_html}</tr></thead>'
-        f'<tbody>{"".join(body_html)}</tbody>'
-        '</table>'
-        '</div>'
-    )
-    st.markdown(table_html, unsafe_allow_html=True)
-
 # ──────────────────────────────────────────────────
 # 차트 함수
 # ──────────────────────────────────────────────────
@@ -740,7 +624,7 @@ def chart_district_bar(result):
         x=DISTRICT_NAMES,
         y=scores,
         marker_color=colors,
-        marker_line=dict(color='rgba(17,24,39,0.08)', width=1),
+        marker_line=dict(color='#ffffff', width=1.5),
         text=labels,
         textposition='outside',
         textfont=dict(size=13, color=COLORS['text']),
@@ -782,16 +666,15 @@ def chart_district_bar(result):
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='구역별 시민 만족도', font=dict(size=15, color=COLORS['text'])),
+        title=dict(text='구역별 시민 만족도', font=dict(size=14, color=COLORS['text'])),
         yaxis=dict(
             range=[30, 100],
-            gridcolor='#e7edf5',
-            gridwidth=0.8,
+            gridcolor=COLORS['border'],
+            gridwidth=0.5,
             tickfont=dict(color=COLORS['text'])
         ),
         xaxis=dict(tickfont=dict(size=12, color=COLORS['text'])),
         height=340,
-        bargap=0.28,
     )
 
     return fig
@@ -807,8 +690,8 @@ def chart_need_radar(result, resource):
         r=need_scores + [need_scores[0]],
         theta=NEED_LABELS + [NEED_LABELS[0]],
         fill='toself',
-        fillcolor='rgba(122,167,255,0.22)',
-        line=dict(color=COLORS['blue_dark'], width=2.2),
+        fillcolor='rgba(143,183,255,0.24)',
+        line=dict(color=COLORS['blue_dark'], width=2.5),
         marker=dict(size=6, color=COLORS['blue_dark']),
         name='니즈 충족도',
         hovertemplate='<b>%{theta}</b><br>%{r:.1f}점<extra></extra>',
@@ -816,18 +699,16 @@ def chart_need_radar(result, resource):
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='5개 니즈 충족도', font=dict(size=15, color=COLORS['text'])),
+        title=dict(text='5개 니즈 충족도', font=dict(size=14, color=COLORS['text'])),
         polar=dict(
             bgcolor='rgba(0,0,0,0)',
             radialaxis=dict(
                 range=[0,100],
-                gridcolor='#dce5f2',
-                linecolor='#cbd5e1',
+                gridcolor=COLORS['border'],
                 tickfont=dict(color=COLORS['text'], size=10)
             ),
             angularaxis=dict(
-                gridcolor='#dce5f2',
-                linecolor='#cbd5e1',
+                gridcolor=COLORS['border'],
                 tickfont=dict(color=COLORS['text'], size=12)
             ),
         ),
@@ -840,12 +721,6 @@ def chart_need_radar(result, resource):
 
 def chart_energy_gauge(rate):
     color = (
-        COLORS['red'] if rate < 0.40 else
-        COLORS['yellow'] if rate < 0.60 else
-        COLORS['blue'] if rate < 0.80 else
-        COLORS['green']
-    )
-    number_color = (
         COLORS['red_dark'] if rate < 0.40 else
         COLORS['yellow_dark'] if rate < 0.60 else
         COLORS['blue_dark'] if rate < 0.80 else
@@ -855,12 +730,12 @@ def chart_energy_gauge(rate):
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
-        number=dict(suffix='%', font=dict(size=36, color=number_color)),
+        number=dict(suffix='%', font=dict(size=36, color=color)),
         delta=dict(
             reference=40,
             valueformat='.1f',
-            increasing=dict(color=COLORS['green_dark']),
-            decreasing=dict(color=COLORS['red_dark'])
+            increasing=dict(color=COLORS['green']),
+            decreasing=dict(color=COLORS['red'])
         ),
         gauge=dict(
             axis=dict(
@@ -873,10 +748,10 @@ def chart_energy_gauge(rate):
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
             steps=[
-                dict(range=[0,40],  color='rgba(242,160,161,0.22)'),
-                dict(range=[40,60], color='rgba(244,199,110,0.25)'),
-                dict(range=[60,80], color='rgba(122,167,255,0.22)'),
-                dict(range=[80,100],color='rgba(139,214,163,0.24)'),
+                dict(range=[0,40],  color='rgba(244,166,166,0.34)'),
+                dict(range=[40,60], color='rgba(246,211,139,0.36)'),
+                dict(range=[60,80], color='rgba(143,183,255,0.34)'),
+                dict(range=[80,100],color='rgba(167,216,163,0.34)'),
             ],
             threshold=dict(
                 line=dict(color=COLORS['text'], width=2),
@@ -885,7 +760,7 @@ def chart_energy_gauge(rate):
             ),
         ),
         title=dict(
-            text='에너지 자립률<br><span style="font-size:11px;color:#4b5563">목표: 83.13% (세종시)</span>',
+            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
             font=dict(size=14, color=COLORS['text'])
         ),
     ))
@@ -896,7 +771,7 @@ def chart_energy_gauge(rate):
 
 
 def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
-    labels = ['복지', '교육', '에너지\n인프라', '일반\n인프라', '안전']
+    labels = ['복지', '교육', '에너지\\n인프라', '일반\\n인프라', '안전']
     values = [welfare, education, energy_infra, general_infra, safety]
     colors_pie = [
         COLORS['green'],
@@ -911,25 +786,26 @@ def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
         values=values,
         marker=dict(
             colors=colors_pie,
-            line=dict(color='#ffffff', width=3)
+            line=dict(color='#ffffff', width=2)
         ),
-        textfont=dict(size=12, color=COLORS['text']),
-        insidetextfont=dict(size=12, color=COLORS['text']),
+        textinfo='percent',
+        textfont=dict(size=13, color=COLORS['text']),
+        insidetextfont=dict(size=13, color=COLORS['text']),
         outsidetextfont=dict(size=12, color=COLORS['text']),
         hovertemplate='<b>%{label}</b><br>%{value}%<extra></extra>',
         hole=0.45,
-        pull=[0.03]*5,
+        pull=[0.025]*5,
     ))
 
     fig.update_layout(
         **{
             **PLOT_LAYOUT,
-            'title': dict(text='예산 배분 현황', font=dict(size=15, color=COLORS['text'])),
-            'height': 300,
+            'title': dict(text='예산 배분 현황', font=dict(size=14, color=COLORS['text'])),
+            'height': 280,
             'showlegend': True,
             'legend': dict(
                 orientation='v',
-                x=1.04,
+                x=1.02,
                 y=0.5,
                 font=dict(size=12, color=COLORS['text']),
                 bgcolor='rgba(255,255,255,0.96)',
@@ -952,23 +828,24 @@ def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
 
 
 def chart_energy_pie(solar, hydrogen, ess, external):
-    labels = ['태양광', '수소\n연료전지', 'ESS', '외부\n전력망']
+    labels = ['태양광', '수소\\n연료전지', 'ESS', '외부\\n전력망']
     values = [solar, hydrogen, ess, external]
-    colors_e = [COLORS['yellow'], COLORS['blue'], COLORS['green'], '#cbd5e1']
+    colors_e = [COLORS['yellow'], COLORS['blue'], COLORS['green'], '#d1d5db']
 
     fig = go.Figure(go.Pie(
         labels=labels,
         values=values,
         marker=dict(
             colors=colors_e,
-            line=dict(color='#ffffff', width=3)
+            line=dict(color='#ffffff', width=2)
         ),
-        textfont=dict(size=12, color=COLORS['text']),
-        insidetextfont=dict(size=12, color=COLORS['text']),
+        textinfo='percent',
+        textfont=dict(size=13, color=COLORS['text']),
+        insidetextfont=dict(size=13, color=COLORS['text']),
         outsidetextfont=dict(size=12, color=COLORS['text']),
         hovertemplate='<b>%{label}</b><br>%{value}%<extra></extra>',
         hole=0.45,
-        pull=[0.03]*4,
+        pull=[0.025]*4,
     ))
 
     self_rate = round((solar*0.7 + hydrogen*0.9 + ess*0.6) / 100, 3) * 100
@@ -976,12 +853,12 @@ def chart_energy_pie(solar, hydrogen, ess, external):
     fig.update_layout(
         **{
             **PLOT_LAYOUT,
-            'title': dict(text='에너지원 구성', font=dict(size=15, color=COLORS['text'])),
-            'height': 300,
+            'title': dict(text='에너지원 구성', font=dict(size=14, color=COLORS['text'])),
+            'height': 280,
             'showlegend': True,
             'legend': dict(
                 orientation='v',
-                x=1.04,
+                x=1.02,
                 y=0.5,
                 font=dict(size=12, color=COLORS['text']),
                 bgcolor='rgba(255,255,255,0.96)',
@@ -994,7 +871,7 @@ def chart_energy_pie(solar, hydrogen, ess, external):
                     x=0.5,
                     y=0.5,
                     showarrow=False,
-                    font=dict(size=15, color=COLORS['text'], family='Inter')
+                    font=dict(size=14, color=COLORS['text'], family='Inter')
                 )
             ]
         }
@@ -1042,7 +919,7 @@ def chart_nonlinear_curve():
         mode='lines',
         line=dict(color=COLORS['blue_dark'], width=2.5),
         fill='tozeroy',
-        fillcolor='rgba(122,167,255,0.16)',
+        fillcolor='rgba(143,183,255,0.22)',
         name='충족도 곡선',
         hovertemplate='예산 %{x:.1f}% → 충족도 %{y:.1f}점<extra></extra>',
     ))
@@ -1073,19 +950,17 @@ def chart_nonlinear_curve():
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='비선형 변환 함수 — 임계점 효과', font=dict(size=15, color=COLORS['text'])),
+        title=dict(text='비선형 변환 함수 — 임계점 효과', font=dict(size=14, color=COLORS['text'])),
         xaxis=dict(
             title=dict(text='예산 비율 (%)', font=dict(color=COLORS['text'])),
             tickfont=dict(color=COLORS['text']),
-            gridcolor='#e7edf5',
-            zerolinecolor='#cbd5e1'
+            gridcolor=COLORS['border']
         ),
         yaxis=dict(
             title=dict(text='니즈 충족도 점수', font=dict(color=COLORS['text'])),
             tickfont=dict(color=COLORS['text']),
             range=[0,105],
-            gridcolor='#e7edf5',
-            zerolinecolor='#cbd5e1'
+            gridcolor=COLORS['border']
         ),
         height=280,
         showlegend=False,
@@ -1105,8 +980,8 @@ def chart_scenario_compare(results_dict):
         x=scenarios,
         y=avgs,
         name='도시 평균 만족도',
-        marker_color=['#9cc4ff'] * len(scenarios),
-        marker_line=dict(color='rgba(17,24,39,0.08)', width=1),
+        marker_color=['#b7d4ff']*len(scenarios),
+        marker_line=dict(color='#ffffff', width=1.5),
         text=[f'{v:.1f}' for v in avgs],
         textposition='outside',
         textfont=dict(size=12, color=COLORS['text']),
@@ -1118,28 +993,30 @@ def chart_scenario_compare(results_dict):
         y=rates,
         name='에너지 자립률',
         mode='lines+markers',
-        line=dict(color='#d6a21f', width=2.8),
-        marker=dict(size=9, color='#d6a21f', line=dict(color='white', width=1)),
+        line=dict(color='#d4a017', width=2.8),
+        marker=dict(size=9, color='#d4a017', line=dict(color='#ffffff', width=1.5)),
+        text=[f'{v:.1f}%' for v in rates],
+        textposition='top center',
         hovertemplate='<b>%{x}</b><br>자립률: %{y:.1f}%<extra></extra>',
     ), secondary_y=True)
 
     fig.update_layout(
         **PLOT_LAYOUT,
         title=dict(text='시나리오별 비교 — 만족도 & 에너지 자립률', font=dict(size=15, color=COLORS['text'])),
-        height=350,
+        height=340,
         xaxis=dict(
             tickfont=dict(size=11, color=COLORS['text']),
             title=dict(font=dict(color=COLORS['text'])),
-            gridcolor='#e7edf5'
+            gridcolor=COLORS['border']
         ),
         legend=dict(
-            bgcolor='rgba(255,255,255,0.96)',
+            bgcolor='rgba(255,255,255,0.98)',
             bordercolor=COLORS['border'],
             borderwidth=1,
             font=dict(size=12, color=COLORS['text']),
-            x=1.08,
-            y=1.0
-        ),
+            x=1.05,
+            y=1
+        )
     )
 
     fig.update_yaxes(
@@ -1147,8 +1024,8 @@ def chart_scenario_compare(results_dict):
         title_font=dict(color=COLORS['text']),
         tickfont=dict(color=COLORS['text']),
         range=[40,85],
-        gridcolor='#e7edf5',
-        zerolinecolor='#cbd5e1',
+        gridcolor=COLORS['border'],
+        zerolinecolor=COLORS['border'],
         secondary_y=False
     )
 
@@ -1157,8 +1034,8 @@ def chart_scenario_compare(results_dict):
         title_font=dict(color=COLORS['text']),
         tickfont=dict(color=COLORS['text']),
         range=[0,100],
-        gridcolor='#f1f5f9',
-        zerolinecolor='#cbd5e1',
+        gridcolor=COLORS['border'],
+        zerolinecolor=COLORS['border'],
         secondary_y=True
     )
 
@@ -1176,12 +1053,12 @@ def chart_district_heatmap(results_dict):
     d_labels = ['A (산업단지)', 'B (대학가)', 'C (복지타운)', 'D (신도시)', 'E (구도심)']
 
     pastel_blues = [
-        [0.00, '#f8fbff'],
-        [0.18, '#edf6ff'],
-        [0.36, '#dceeff'],
-        [0.54, '#c8e1ff'],
-        [0.72, '#b2d2ff'],
-        [1.00, '#8fb9ff'],
+        [0.0, '#f8fbff'],
+        [0.2, '#eaf4ff'],
+        [0.4, '#d7ebff'],
+        [0.6, '#c3ddff'],
+        [0.8, '#aecfff'],
+        [1.0, '#94bdf4'],
     ]
 
     fig = go.Figure(go.Heatmap(
@@ -1198,14 +1075,18 @@ def chart_district_heatmap(results_dict):
         colorbar=dict(
             title=dict(text='점수', font=dict(color=COLORS['text'])),
             tickfont=dict(color=COLORS['text']),
-            outlinecolor=COLORS['border']
+            bgcolor='rgba(255,255,255,0.95)',
+            bordercolor=COLORS['border'],
+            borderwidth=1
         ),
+        xgap=2,
+        ygap=2
     ))
 
     fig.update_layout(
         **PLOT_LAYOUT,
         title=dict(text='구역별 만족도 히트맵 (시나리오 전체)', font=dict(size=15, color=COLORS['text'])),
-        height=350,
+        height=340,
         xaxis=dict(
             tickfont=dict(size=12, color=COLORS['text']),
             title=dict(font=dict(color=COLORS['text']))
@@ -1627,12 +1508,37 @@ with tab1:
             '게이지': int(s),
         })
 
-    render_readable_table(
-        rows=rows,
-        columns=['구역', '만족도', '평가', '게이지'],
-        score_key='만족도',
-        gauge_key='게이지',
-        eval_key='평가'
+    df = pd.DataFrame(rows)
+
+    def color_row(row):
+        s = float(row['만족도'].replace('점',''))
+        if s < 50:
+            c = '#fff1f2'
+        elif s < 60:
+            c = '#fffbeb'
+        elif s < 75:
+            c = '#eff6ff'
+        else:
+            c = '#f0fdf4'
+        return [f'background-color:{c}; color:#111827; font-weight:600;']*len(row)
+
+    st.dataframe(
+        df.style
+          .apply(color_row, axis=1)
+          .set_table_styles([
+              {'selector': 'th', 'props': [
+                  ('background-color', '#eaf4ff'),
+                  ('color', '#111827'),
+                  ('font-weight', '800'),
+                  ('border-color', '#d9e2ec')
+              ]},
+              {'selector': 'td', 'props': [
+                  ('color', '#111827'),
+                  ('border-color', '#d9e2ec')
+              ]}
+          ]),
+        use_container_width=True,
+        hide_index=True,
     )
 
 # ════════════════════════════════════════════════
@@ -1702,12 +1608,30 @@ with tab2:
             'E구역': f"{res['districts']['E구역(구도심)']:.1f}",
         })
 
-    render_readable_table(
-        rows=compare_rows,
-        columns=['시나리오', '도시 평균', '자립률', '절감액', 'A구역', 'B구역', 'C구역', 'D구역', 'E구역'],
-        score_key='도시 평균',
-        gauge_key=None,
-        eval_key=None
+    compare_df = pd.DataFrame(compare_rows)
+
+    st.dataframe(
+        compare_df.style
+            .set_properties(**{
+                'color': '#111827',
+                'background-color': '#f8fbff',
+                'border-color': '#d9e2ec',
+                'font-weight': '600'
+            })
+            .set_table_styles([
+                {'selector': 'th', 'props': [
+                    ('background-color', '#eaf4ff'),
+                    ('color', '#111827'),
+                    ('font-weight', '800'),
+                    ('border-color', '#d9e2ec')
+                ]},
+                {'selector': 'td', 'props': [
+                    ('color', '#111827'),
+                    ('border-color', '#d9e2ec')
+                ]}
+            ]),
+        use_container_width=True,
+        hide_index=True
     )
 
 # ════════════════════════════════════════════════
@@ -1744,16 +1668,16 @@ with tab3:
             x=[r*100 for r in rates_x],
             y=bonuses,
             mode='lines',
-            line=dict(color='#d6a21f', width=2.5),
+            line=dict(color=COLORS['yellow_dark'], width=2.5),
             fill='tozeroy',
-            fillcolor='rgba(244,199,110,0.18)',
+            fillcolor='rgba(246,211,139,0.24)',
             hovertemplate='자립률 %{x:.1f}% → 보정 %{y:+.1f}점<extra></extra>',
         ))
 
         fig_e.add_hline(
             y=0,
             line_dash='dash',
-            line_color='#94a3b8',
+            line_color=COLORS['muted'],
             line_width=1
         )
 
@@ -1766,7 +1690,7 @@ with tab3:
             fig_e.add_vline(
                 x=rx*100,
                 line_dash='dot',
-                line_color='#94a3b8',
+                line_color=COLORS['muted'],
                 line_width=1,
                 annotation_text=label,
                 annotation_font_color=COLORS['text'],
@@ -1779,12 +1703,12 @@ with tab3:
             xaxis=dict(
                 title=dict(text='에너지 자립률 (%)', font=dict(color=COLORS['text'])),
                 tickfont=dict(color=COLORS['text']),
-                gridcolor='#e7edf5'
+                gridcolor=COLORS['border']
             ),
             yaxis=dict(
                 title=dict(text='보정값 (점)', font=dict(color=COLORS['text'])),
                 tickfont=dict(color=COLORS['text']),
-                gridcolor='#e7edf5'
+                gridcolor=COLORS['border']
             ),
             height=280,
             showlegend=False,
