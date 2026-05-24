@@ -321,6 +321,17 @@ st.markdown("""
     fill: #111827 !important;
     color: #111827 !important;
 }
+
+/* ===== 표 헤더 글씨 흰색 보정 ===== */
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] [role="columnheader"] *,
+[data-testid="stDataFrame"] thead,
+[data-testid="stDataFrame"] thead *,
+[data-testid="stDataFrame"] th,
+[data-testid="stDataFrame"] th * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -564,13 +575,30 @@ def chart_need_radar(result, resource):
 
 def chart_energy_gauge(rate):
     color = COLORS['red'] if rate < 0.40 else COLORS['yellow'] if rate < 0.60 else COLORS['blue'] if rate < 0.80 else COLORS['green']
+    delta_color = '#1A7F37' if rate >= 0.40 else '#CF222E'
+
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
+        domain=dict(x=[0.04, 0.88], y=[0.0, 1.0]),
         number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
-        delta=dict(reference=40, valueformat='.1f', font=dict(size=20, color=COLORS['text']), increasing=dict(color='#1A7F37'), decreasing=dict(color='#CF222E')),
+        delta=dict(
+            reference=40,
+            valueformat='.1f',
+            font=dict(size=20, color=delta_color),
+            increasing=dict(color='#1A7F37'),
+            decreasing=dict(color='#CF222E')
+        ),
         gauge=dict(
-            axis=dict(range=[0, 100], tickwidth=1, tickcolor=COLORS['text'], tickfont=dict(color=COLORS['text'], size=10)),
+            axis=dict(
+                range=[0, 100],
+                tickmode='array',
+                tickvals=[0, 20, 40, 60, 80, 100],
+                ticktext=['0', '20', '40', '60', '80', '100'],
+                tickwidth=1,
+                tickcolor=COLORS['text'],
+                tickfont=dict(color=COLORS['text'], size=10)
+            ),
             bar=dict(color=color, thickness=0.25),
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
@@ -582,9 +610,17 @@ def chart_energy_gauge(rate):
             ],
             threshold=dict(line=dict(color=COLORS['text'], width=2), thickness=0.75, value=83.13),
         ),
-        title=dict(text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>', font=dict(size=14, color=COLORS['text'])),
+        title=dict(
+            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
+            font=dict(size=14, color=COLORS['text'])
+        ),
     ))
-    fig.update_layout(**PLOT_LAYOUT, height=280)
+
+    fig.update_layout(
+        **PLOT_LAYOUT,
+        height=280,
+        margin=dict(l=16, r=95, t=50, b=16)
+    )
     return fig
 
 
