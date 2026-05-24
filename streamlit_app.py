@@ -321,17 +321,6 @@ st.markdown("""
     fill: #111827 !important;
     color: #111827 !important;
 }
-
-/* ===== 표 헤더 글씨 흰색 보정 ===== */
-[data-testid="stDataFrame"] [role="columnheader"],
-[data-testid="stDataFrame"] [role="columnheader"] *,
-[data-testid="stDataFrame"] thead,
-[data-testid="stDataFrame"] thead *,
-[data-testid="stDataFrame"] th,
-[data-testid="stDataFrame"] th * {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
