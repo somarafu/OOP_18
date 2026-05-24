@@ -104,14 +104,14 @@ st.markdown("""
 .metric-purple{ color: #8250df; }
 
 .section-header {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #656d76;
-    padding: 8px 0 4px;
-    border-bottom: 1px solid #d0d7de;
-    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    color: #334155;
+    padding: 10px 0 8px;
+    border-bottom: 2px solid #cbd5e1;
+    margin-bottom: 14px;
 }
 
 .alert-danger {
@@ -294,6 +294,271 @@ st.markdown("""
 }
 .flow-text { font-size: 14px; color: #57606a; line-height: 1.6; }
 .flow-text b { color: #1f2328; }
+
+/* 구역별 상세 현황 표 */
+.district-table-card {
+    background: #ffffff;
+    border: 1px solid #dbe2ea;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+    margin-top: 8px;
+}
+.district-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    font-size: 15px;
+}
+.district-table thead th {
+    background: #eaf3ff;
+    color: #0f172a;
+    font-weight: 900;
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid #cbd5e1;
+}
+.district-table tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111827;
+    font-weight: 650;
+}
+.district-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.district-row-danger td {
+    background: #fee2e2;
+    color: #7f1d1d !important;
+}
+.district-row-warn td {
+    background: #fef3c7;
+    color: #78350f !important;
+}
+.district-row-blue td {
+    background: #dbeafe;
+    color: #1e3a8a !important;
+}
+.district-row-green td {
+    background: #dcfce7;
+    color: #14532d !important;
+}
+.district-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 13px;
+    font-weight: 900;
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(15,23,42,0.12);
+}
+.gauge-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(15,23,42,0.10);
+    overflow: hidden;
+}
+.gauge-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+/* 프로젝트 소개 탭 개선 */
+.project-hero-soft {
+    background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 55%, #ecfeff 100%);
+    border: 1px solid #dbeafe;
+    border-radius: 24px;
+    padding: 30px 34px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+}
+.project-hero-kicker {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+    color: #2563eb;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.project-hero-title {
+    font-size: 34px;
+    line-height: 1.25;
+    font-weight: 950;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+.project-hero-desc {
+    max-width: 980px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #475569;
+}
+.project-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 18px;
+}
+.project-pill {
+    background: #ffffff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 800;
+}
+.project-grid-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 18px;
+    align-items: stretch;
+    margin-bottom: 18px;
+}
+.project-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.project-card {
+    background: #ffffff;
+    border: 1px solid #dbe2ea;
+    border-radius: 20px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+    height: 100%;
+}
+.project-card h3 {
+    margin: 0 0 12px;
+    color: #0f172a;
+    font-size: 21px;
+    font-weight: 950;
+}
+.project-card p {
+    margin: 0;
+    color: #475569;
+    font-size: 14.5px;
+    line-height: 1.75;
+}
+.project-quote {
+    margin: 16px 0;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: #eff6ff;
+    border-left: 5px solid #3b82f6;
+    color: #1d4ed8;
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 950;
+}
+.project-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+.project-flow-step {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 16px;
+}
+.project-flow-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 950;
+    margin-bottom: 10px;
+}
+.project-flow-title {
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 950;
+    margin-bottom: 6px;
+}
+.project-flow-desc {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.project-scenario {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 13px;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+}
+.project-scenario:last-child { margin-bottom: 0; }
+.project-scenario.featured {
+    background: #faf5ff;
+    border-color: #d8b4fe;
+}
+.project-scenario-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    background: #ffffff;
+    border: 1px solid #dbe2ea;
+}
+.project-scenario-title {
+    font-size: 15px;
+    font-weight: 950;
+    color: #0f172a;
+    margin-bottom: 3px;
+}
+.project-scenario-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #64748b;
+}
+.project-mini-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+.project-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.85;
+}
+.project-list b {
+    color: #0f172a;
+}
+@media (max-width: 1100px) {
+    .project-grid-2,
+    .project-grid-3,
+    .project-flow-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -318,7 +583,7 @@ PLOT_LAYOUT = dict(
         bgcolor='rgba(246,248,250,0.9)',
         bordercolor=COLORS['border'],
         borderwidth=1,
-        font=dict(size=11),
+        font=dict(size=11, color=COLORS['text']),
     ),
 )
 
@@ -571,7 +836,7 @@ def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
             'title': dict(text='예산 배분 현황', font=dict(size=14, color=COLORS['text'])),
             'height': 280,
             'showlegend': True,
-            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11), bgcolor='rgba(0,0,0,0)'),
+            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=12, color=COLORS['text']), bgcolor='rgba(255,255,255,0.92)', bordercolor=COLORS['border'], borderwidth=1),
             'annotations': [dict(text=f'{sum(values)}%', x=0.5, y=0.5, showarrow=False, font=dict(size=16, color=COLORS['text'], family='Inter'))],
         }
     )
@@ -598,7 +863,7 @@ def chart_energy_pie(solar, hydrogen, ess, external):
             'title': dict(text='에너지원 구성', font=dict(size=14, color=COLORS['text'])),
             'height': 280,
             'showlegend': True,
-            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=11), bgcolor='rgba(0,0,0,0)'),
+            'legend': dict(orientation='v', x=1.0, y=0.5, font=dict(size=12, color=COLORS['text']), bgcolor='rgba(255,255,255,0.92)', bordercolor=COLORS['border'], borderwidth=1),
             'annotations': [dict(text=f'자립<br>{self_rate:.0f}%', x=0.5, y=0.5, showarrow=False, font=dict(size=14, color=COLORS['text'], family='Inter'))],
         }
     )
@@ -649,35 +914,82 @@ def chart_scenario_compare(results_dict):
     scenarios = list(results_dict.keys())
     avgs = [results_dict[s]['city_average'] for s in scenarios]
     rates = [results_dict[s]['independence_rate'] * 100 for s in scenarios]
+
     fig = make_subplots(specs=[[{"secondary_y": True}]])
+
     fig.add_trace(go.Bar(
         x=scenarios,
         y=avgs,
         name='도시 평균 만족도',
-        marker_color=[COLORS['blue']] * len(scenarios),
-        marker_line_width=0,
+        marker_color=['#9ec5fe'] * len(scenarios),
+        marker_line_color='#5b8def',
+        marker_line_width=1.2,
         text=[f'{v:.1f}' for v in avgs],
         textposition='outside',
-        textfont=dict(size=11, color=COLORS['text']),
+        textfont=dict(size=12, color='#0f172a'),
         hovertemplate='<b>%{x}</b><br>평균: %{y:.1f}점<extra></extra>',
     ), secondary_y=False)
+
     fig.add_trace(go.Scatter(
         x=scenarios,
         y=rates,
         name='에너지 자립률',
-        mode='lines+markers',
-        line=dict(color=COLORS['yellow'], width=2.5),
-        marker=dict(size=8, color=COLORS['yellow']),
+        mode='lines+markers+text',
+        line=dict(color='#f4b740', width=3),
+        marker=dict(size=10, color='#f4b740', line=dict(color='#8a5a00', width=1)),
+        text=[f'{v:.1f}' for v in rates],
+        textposition='bottom center',
+        textfont=dict(size=11, color='#334155'),
         hovertemplate='<b>%{x}</b><br>자립률: %{y:.1f}%<extra></extra>',
     ), secondary_y=True)
+
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='시나리오별 비교 — 만족도 & 에너지 자립률', font=dict(size=14, color=COLORS['text'])),
-        height=320,
-        xaxis=dict(tickfont=dict(size=11, color=COLORS['text']), title=dict(font=dict(color=COLORS['text'])), gridcolor=COLORS['border']),
+        title=dict(
+            text='시나리오별 비교 — 만족도 & 에너지 자립률',
+            font=dict(size=16, color='#0f172a')
+        ),
+        height=340,
+        bargap=0.22,
+        xaxis=dict(
+            tickfont=dict(size=12, color='#0f172a'),
+            title=dict(font=dict(color='#0f172a')),
+            gridcolor='rgba(226,232,240,0.7)',
+            linecolor='#cbd5e1'
+        ),
+        legend=dict(
+            orientation='v',
+            x=1.08,
+            y=1,
+            bgcolor='rgba(255,255,255,0.96)',
+            bordercolor='#cbd5e1',
+            borderwidth=1,
+            font=dict(size=12, color='#0f172a')
+        ),
+        plot_bgcolor='#ffffff',
+        paper_bgcolor='#ffffff',
     )
-    fig.update_yaxes(title_text='도시 평균 만족도', title_font=dict(color=COLORS['text']), tickfont=dict(color=COLORS['text']), range=[40, 85], gridcolor=COLORS['border'], secondary_y=False)
-    fig.update_yaxes(title_text='에너지 자립률 (%)', title_font=dict(color=COLORS['text']), tickfont=dict(color=COLORS['text']), range=[0, 100], secondary_y=True)
+
+    fig.update_yaxes(
+        title_text='도시 평균 만족도',
+        title_font=dict(color='#0f172a', size=13),
+        tickfont=dict(color='#0f172a'),
+        range=[40, 85],
+        gridcolor='#dbeafe',
+        zeroline=False,
+        secondary_y=False
+    )
+
+    fig.update_yaxes(
+        title_text='에너지 자립률 (%)',
+        title_font=dict(color='#0f172a', size=13),
+        tickfont=dict(color='#0f172a'),
+        range=[0, 100],
+        gridcolor='rgba(0,0,0,0)',
+        zeroline=False,
+        secondary_y=True
+    )
+
     return fig
 
 
@@ -685,26 +997,57 @@ def chart_district_heatmap(results_dict):
     scenarios = list(results_dict.keys())
     z = [[results_dict[s]['districts'][k] for k in DISTRICT_KEYS] for s in scenarios]
     d_labels = ['A (산업단지)', 'B (대학가)', 'C (복지타운)', 'D (신도시)', 'E (구도심)']
+
+    bright_blues = [
+        [0.0, '#f8fbff'],
+        [0.18, '#eaf4ff'],
+        [0.38, '#d8ecff'],
+        [0.58, '#bfddff'],
+        [0.78, '#a7cdfb'],
+        [1.0, '#7fb4f2'],
+    ]
+
     fig = go.Figure(go.Heatmap(
         z=z,
         x=d_labels,
         y=scenarios,
-        colorscale='Blues',
+        colorscale=bright_blues,
         zmin=40,
         zmax=80,
         text=[[f'{v:.1f}' for v in row] for row in z],
         texttemplate='%{text}',
-        textfont=dict(size=11, color='black'),
+        textfont=dict(size=12, color='#0f172a'),
         hovertemplate='시나리오: %{y}<br>구역: %{x}<br>만족도: %{z:.1f}점<extra></extra>',
-        colorbar=dict(title=dict(text='점수', font=dict(color=COLORS['text'])), tickfont=dict(color=COLORS['text'])),
+        colorbar=dict(
+            title=dict(text='점수', font=dict(color='#0f172a', size=13)),
+            tickfont=dict(color='#0f172a'),
+            bgcolor='rgba(255,255,255,0.95)',
+            bordercolor='#cbd5e1',
+            borderwidth=1
+        ),
+        xgap=2,
+        ygap=2,
     ))
+
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='구역별 만족도 히트맵 (시나리오 전체)', font=dict(size=14, color=COLORS['text'])),
-        height=320,
-        xaxis=dict(tickfont=dict(size=11, color=COLORS['text']), title=dict(font=dict(color=COLORS['text']))),
-        yaxis=dict(tickfont=dict(size=11, color=COLORS['text']), title=dict(font=dict(color=COLORS['text']))),
+        title=dict(text='구역별 만족도 히트맵 (시나리오 전체)', font=dict(size=16, color='#0f172a')),
+        height=360,
+        xaxis=dict(
+            tickfont=dict(size=12, color='#0f172a'),
+            title=dict(font=dict(color='#0f172a')),
+            side='bottom'
+        ),
+        yaxis=dict(
+            tickfont=dict(size=12, color='#0f172a'),
+            title=dict(font=dict(color='#0f172a')),
+            autorange='reversed'
+        ),
+        plot_bgcolor='#ffffff',
+        paper_bgcolor='#ffffff',
+        margin=dict(l=120, r=80, t=50, b=45),
     )
+
     return fig
 
 # ──────────────────────────────────────────────────
@@ -958,21 +1301,21 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
 
     safe_preset = html_lib.escape(str(preset_choice))
     warning_text = '위험 구역 없음' if not warnings else f'주의 구역 {len(warnings)}개'
-    warning_color = '#1a7f37' if not warnings else '#cf222e'
+    warning_color = '#15803d' if not warnings else '#b91c1c'
 
     html = f"""
     <style>
     * {{ box-sizing: border-box; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
     body {{ margin: 0; background: #ffffff; color: #1f2328; }}
     .sim-root {{ width: 100%; padding: 8px 4px 28px; }}
-    .sim-hero {{ background: linear-gradient(135deg, #26364f 0%, #315f80 52%, #4b8f9f 100%); border-radius: 24px; padding: 24px 28px; color: white; margin-bottom: 16px; box-shadow: 0 14px 28px rgba(38,54,79,0.20); }}
+    .sim-hero {{ background: linear-gradient(135deg, #eaf4ff 0%, #dbeafe 44%, #e0f7fa 100%); border: 1px solid #bfdbfe; border-radius: 24px; padding: 28px 30px; color: #0f172a; margin-bottom: 18px; box-shadow: 0 14px 28px rgba(59,130,246,0.12); }}
     .sim-hero-grid {{ display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: center; }}
-    .sim-hero-title {{ font-size: 32px; font-weight: 900; line-height: 1.25; margin-bottom: 8px; }}
-    .sim-hero-desc {{ font-size: 15px; line-height: 1.7; opacity: 0.95; }}
-    .sim-hero-panel {{ background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); border-radius: 20px; padding: 14px 16px; }}
-    .sim-hero-row {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.16); font-size: 13px; font-weight: 800; }}
+    .sim-hero-title {{ font-size: 34px; font-weight: 950; line-height: 1.25; margin-bottom: 10px; color: #0f172a; }}
+    .sim-hero-desc {{ font-size: 16px; line-height: 1.75; color: #334155; }}
+    .sim-hero-panel {{ background: rgba(255,255,255,0.78); border: 1px solid #bfdbfe; border-radius: 22px; padding: 16px 18px; box-shadow: 0 10px 18px rgba(15,23,42,0.06); }}
+    .sim-hero-row {{ display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; font-weight: 850; color: #0f172a; }}
     .sim-hero-row:last-child {{ border-bottom: none; }}
-    .sim-hero-value {{ font-size: 16px; font-weight: 900; }}
+    .sim-hero-value {{ font-size: 17px; font-weight: 950; color: #0f172a; }}
     .sim-section-title {{ font-size: 22px; font-weight: 900; margin: 18px 0 6px; color: #1f2328; }}
     .sim-section-sub {{ font-size: 13px; color: #57606a; line-height: 1.6; margin-bottom: 12px; }}
     .sim-village-scroll {{ width: 100%; overflow-x: auto; padding-bottom: 10px; margin-bottom: 22px; }}
@@ -1326,18 +1669,63 @@ with tab1:
 
     st.markdown('<div style="height:12px"></div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">구역별 상세 현황</div>', unsafe_allow_html=True)
-    rows = []
-    for k, name in zip(DISTRICT_KEYS, ['A구역 (산업단지)', 'B구역 (대학가)', 'C구역 (복지타운)', 'D구역 (신도시)', 'E구역 (구도심)']):
+
+    detail_rows = []
+    for k, name in zip(
+        DISTRICT_KEYS,
+        ['A구역 (산업단지)', 'B구역 (대학가)', 'C구역 (복지타운)', 'D구역 (신도시)', 'E구역 (구도심)']
+    ):
         s = result['districts'][k]
-        rows.append({'구역': name, '만족도': f'{s:.1f}점', '평가': score_label(s), '게이지': int(s)})
-    df = pd.DataFrame(rows)
+        detail_rows.append((name, s, score_label(s), int(s)))
 
-    def color_row(row):
-        s = float(row['만족도'].replace('점', ''))
-        c = '#ffebe9' if s < 50 else '#dafbe1' if s >= 75 else '#ddf4ff'
-        return [f'background-color:{c};color:#1f2328'] * len(row)
+    table_rows_html = []
+    for name, s, label, gauge in detail_rows:
+        if s < 50:
+            row_class = 'district-row-danger'
+            fill_color = '#ef4444'
+        elif s < 60:
+            row_class = 'district-row-warn'
+            fill_color = '#f59e0b'
+        elif s < 75:
+            row_class = 'district-row-blue'
+            fill_color = '#3b82f6'
+        else:
+            row_class = 'district-row-green'
+            fill_color = '#22c55e'
 
-    st.dataframe(df.style.apply(color_row, axis=1), use_container_width=True, hide_index=True)
+        table_rows_html.append(f"""
+            <tr class="{row_class}">
+                <td>{name}</td>
+                <td>{s:.1f}점</td>
+                <td><span class="district-badge">{label}</span></td>
+                <td>
+                    <div style="display:grid;grid-template-columns:1fr 46px;gap:12px;align-items:center;">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width:{gauge}%; background:{fill_color};"></div>
+                        </div>
+                        <b>{gauge}</b>
+                    </div>
+                </td>
+            </tr>
+        """)
+
+    st.markdown(f"""
+<div class="district-table-card">
+    <table class="district-table">
+        <thead>
+            <tr>
+                <th>구역</th>
+                <th>만족도</th>
+                <th>평가</th>
+                <th>게이지</th>
+            </tr>
+        </thead>
+        <tbody>
+            {''.join(table_rows_html)}
+        </tbody>
+    </table>
+</div>
+    """, unsafe_allow_html=True)
 
 # ════════════════════════════════════════════════
 # TAB 2: 게임형 시뮬레이션
@@ -1476,112 +1864,140 @@ with tab4:
 # ════════════════════════════════════════════════
 with tab5:
     st.markdown("""
-<div class="intro-hero">
-    <div class="eyebrow">NOVA Smart City Simulator</div>
-    <div class="title">예산과 에너지 배분이<br>시민 만족도를 어떻게 바꾸는가?</div>
-    <div class="subtitle">
-        이 프로젝트는 스마트시티를 단순한 기술 인프라의 집합이 아니라,
-        제한된 예산과 에너지를 누구에게, 어디에, 어떻게 배분하는지에 따라
-        시민의 삶이 달라지는 정책 시뮬레이션 문제로 바라봅니다.
+<div class="project-hero-soft">
+    <div class="project-hero-kicker">NOVA Smart City Simulator</div>
+    <div class="project-hero-title">예산과 에너지 배분이<br>시민 만족도를 어떻게 바꾸는가?</div>
+    <div class="project-hero-desc">
+        이 프로젝트는 스마트시티를 단순한 기술 인프라가 아니라, 제한된 예산과 에너지를
+        어느 구역과 시민 집단에 배분하느냐에 따라 만족도가 달라지는 정책 시뮬레이션으로 설계했습니다.
     </div>
-    <div class="intro-pills">
-        <div class="intro-pill">💰 예산 배분</div>
-        <div class="intro-pill">⚡ 에너지 자립률</div>
-        <div class="intro-pill">🏘️ 구역별 만족도</div>
-        <div class="intro-pill">🔁 선순환 구조</div>
-        <div class="intro-pill">⚖️ 트레이드오프</div>
+    <div class="project-pill-row">
+        <div class="project-pill">💰 예산 배분</div>
+        <div class="project-pill">⚡ 에너지 자립률</div>
+        <div class="project-pill">🏘️ 구역별 만족도</div>
+        <div class="project-pill">🎮 게임형 시뮬레이션</div>
+        <div class="project-pill">🔁 선순환 구조</div>
+    </div>
+</div>
+
+<div class="project-grid-2">
+    <div class="project-card">
+        <h3>📌 프로젝트 문제의식</h3>
+        <p>
+            스마트시티 정책은 보통 AI, IoT, 에너지 설비 같은 기술 중심으로 설명됩니다.
+            하지만 시민이 실제로 체감하는 도시는 기술의 양보다 <b>자원이 어디에 투입되는가</b>에 따라 달라집니다.
+            복지 예산은 노인과 취약계층의 만족도를 높일 수 있고, 교육 예산은 대학가와 청년층의 기회를 늘릴 수 있습니다.
+        </p>
+        <div class="project-quote">“기술보다 중요한 것은<br>자원이 어디에 배분되는가이다.”</div>
+        <p>
+            그래서 NOVA시는 예산 배분, 에너지 배분, 구역별 시민 구성, 에너지 자립률을 연결해
+            각 시나리오가 도시 평균 만족도와 구역별 만족도에 어떤 차이를 만드는지 보여줍니다.
+        </p>
+    </div>
+
+    <div class="project-card">
+        <h3>🎛️ 프리셋 시나리오 가이드</h3>
+        <div class="project-scenario">
+            <div class="project-scenario-icon">🏗️</div>
+            <div>
+                <div class="project-scenario-title">초기 상태</div>
+                <div class="project-scenario-desc">일반 인프라와 외부전력망 의존도가 높은 기본 상태입니다.</div>
+            </div>
+        </div>
+        <div class="project-scenario">
+            <div class="project-scenario-icon">🤝</div>
+            <div>
+                <div class="project-scenario-title">복지 집중</div>
+                <div class="project-scenario-desc">복지 예산을 확대해 복지타운과 구도심의 만족도를 높이는 전략입니다.</div>
+            </div>
+        </div>
+        <div class="project-scenario">
+            <div class="project-scenario-icon">⚡</div>
+            <div>
+                <div class="project-scenario-title">에너지 자립 집중</div>
+                <div class="project-scenario-desc">에너지 인프라와 신재생에너지 비중을 높여 선순환 효과를 강화합니다.</div>
+            </div>
+        </div>
+        <div class="project-scenario">
+            <div class="project-scenario-icon">⚖️</div>
+            <div>
+                <div class="project-scenario-title">균형 배분</div>
+                <div class="project-scenario-desc">모든 항목을 고르게 배분해 극단적인 위험 구역을 줄이는 안정형 전략입니다.</div>
+            </div>
+        </div>
+        <div class="project-scenario featured">
+            <div class="project-scenario-icon">⭐</div>
+            <div>
+                <div class="project-scenario-title">선순환 최적</div>
+                <div class="project-scenario-desc">만족도와 에너지 자립률을 동시에 높이는 최적화된 정책 조합입니다.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="project-card" style="margin-bottom:18px;">
+    <h3>🔄 시뮬레이션 흐름</h3>
+    <div class="project-flow-grid">
+        <div class="project-flow-step">
+            <div class="project-flow-num">1</div>
+            <div class="project-flow-title">예산 배분 입력</div>
+            <div class="project-flow-desc">복지, 교육, 에너지 인프라, 일반 인프라, 안전 비율을 설정합니다.</div>
+        </div>
+        <div class="project-flow-step">
+            <div class="project-flow-num">2</div>
+            <div class="project-flow-title">에너지 배분 입력</div>
+            <div class="project-flow-desc">태양광, 수소연료전지, ESS, 외부전력망 비율을 설정합니다.</div>
+        </div>
+        <div class="project-flow-step">
+            <div class="project-flow-num">3</div>
+            <div class="project-flow-title">구역별 시민 구성 반영</div>
+            <div class="project-flow-desc">산업단지, 대학가, 복지타운, 신도시, 구도심의 차이를 반영합니다.</div>
+        </div>
+        <div class="project-flow-step">
+            <div class="project-flow-num">4</div>
+            <div class="project-flow-title">만족도와 자립률 산출</div>
+            <div class="project-flow-desc">도시 평균 만족도, 위험 구역, 에너지 자립률, 절감액 환원 효과를 계산합니다.</div>
+        </div>
+    </div>
+</div>
+
+<div class="project-grid-3">
+    <div class="project-card">
+        <div class="project-mini-icon">👥</div>
+        <h3>시민 유형 기반</h3>
+        <p>근로자, 학생, 돌봄담당자, 실업자, 노인 등 시민 유형별로 중요하게 여기는 도시 니즈가 다르게 설정됩니다.</p>
+    </div>
+    <div class="project-card">
+        <div class="project-mini-icon">🏘️</div>
+        <h3>구역별 차이 반영</h3>
+        <p>산업단지, 대학가, 복지타운, 신도시, 구도심의 시민 구성이 달라 같은 정책도 서로 다른 결과를 만듭니다.</p>
+    </div>
+    <div class="project-card">
+        <div class="project-mini-icon">🔁</div>
+        <h3>에너지-예산 선순환</h3>
+        <p>에너지 자립률이 높아지면 절감액이 발생하고, 일부가 복지·교육 예산으로 환원되는 구조를 반영합니다.</p>
+    </div>
+</div>
+
+<div class="project-grid-2">
+    <div class="project-card">
+        <h3>📚 데이터·근거 출처</h3>
+        <ul class="project-list">
+            <li><b>IMD Smart City Index 2024/2026</b> — 시민 만족도 니즈 구조 참고</li>
+            <li><b>세종시 로렌하우스</b> — 에너지 자립률 목표값 83.13% 기준선 활용</li>
+            <li><b>부산 에코델타 스마트빌리지</b> — 태양광, 수소, ESS 에너지원 조합 사례 참고</li>
+            <li><b>Shin et al. (2025), J.Policy Stud.</b> — 공급자 중심 정책 비판 근거</li>
+        </ul>
+    </div>
+    <div class="project-card">
+        <h3>✅ 평가 기준 & 프로젝트 정보</h3>
+        <ul class="project-list">
+            <li>시나리오 변화폭이 5점 이상 나타나는가?</li>
+            <li>에너지와 예산의 선순환 구조가 작동하는가?</li>
+            <li>특정 구역이 소외되는 트레이드오프가 드러나는가?</li>
+            <li>OOP 구조가 클래스 상속, 다형성, 예외처리를 충분히 보여주는가?</li>
+            <li><b>과목</b> 객체지향형 프로그래밍 · <b>주제</b> 스마트시티 자원 배분 시뮬레이션</li>
+        </ul>
     </div>
 </div>
     """, unsafe_allow_html=True)
-
-    col_left, col_right = st.columns([1.25, 1])
-    with col_left:
-        st.markdown("""
-<div class="info-card">
-    <h3>📌 프로젝트 문제의식</h3>
-    <p>
-        스마트시티 정책은 보통 기술 인프라 중심으로 설명되지만, 실제 시민이 체감하는 도시 만족도는
-        기술의 많고 적음만으로 결정되지 않습니다. 제한된 예산을 어떤 구역과 시민 집단에 배분하는지가
-        도시 만족도의 핵심 변수가 됩니다.
-    </p>
-    <div class="big-quote">“기술보다 중요한 것은<br>자원이 어디에 배분되는가이다.”</div>
-    <p>
-        복지 예산을 늘리면 노인과 취약계층의 만족도는 높아질 수 있지만,
-        근로자나 학생의 기회·이동성 만족도는 상대적으로 낮아질 수 있습니다.
-        반대로 에너지 인프라에 투자하면 에너지 자립률이 오르고 절감액이 복지·교육으로 환원되는
-        선순환이 발생할 수 있습니다.
-    </p>
-</div>
-        """, unsafe_allow_html=True)
-        st.markdown('<br>', unsafe_allow_html=True)
-        st.markdown("""
-<div class="flow-box">
-    <h3 style="margin-top:0;font-size:20px;font-weight:900;color:#1f2328;">🔄 시뮬레이션 흐름</h3>
-    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><b>예산 배분 입력</b><br>복지, 교육, 에너지 인프라, 일반 인프라, 안전 비율을 설정합니다.</div></div>
-    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><b>에너지 배분 입력</b><br>태양광, 수소연료전지, ESS, 외부전력망 비율을 설정합니다.</div></div>
-    <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><b>구역별 시민 구성 반영</b><br>산업단지, 대학가, 복지타운, 신도시, 구도심의 시민 유형 차이를 반영합니다.</div></div>
-    <div class="flow-step" style="margin-bottom:0;"><div class="flow-num">4</div><div class="flow-text"><b>만족도와 자립률 산출</b><br>도시 평균 만족도, 위험 구역, 에너지 자립률, 절감액 환원 효과를 계산합니다.</div></div>
-</div>
-        """, unsafe_allow_html=True)
-    with col_right:
-        st.markdown("""
-<div class="info-card">
-    <h3>🎛️ 프리셋 시나리오 가이드</h3>
-    <div class="scenario-card"><div class="scenario-badge">🏗️</div><div><div class="scenario-card-title">초기 상태</div><div class="scenario-card-desc">일반 인프라와 외부전력망에 의존하는 기본 상태입니다.</div></div></div>
-    <div class="scenario-card"><div class="scenario-badge">🤝</div><div><div class="scenario-card-title">복지 집중</div><div class="scenario-card-desc">복지 예산을 크게 늘려 노인·취약계층 중심 구역의 만족도를 높이는 전략입니다.</div></div></div>
-    <div class="scenario-card"><div class="scenario-badge">⚡</div><div><div class="scenario-card-title">에너지 자립 집중</div><div class="scenario-card-desc">에너지 인프라와 신재생에너지 비중을 높여 자립률과 선순환 효과를 강화합니다.</div></div></div>
-    <div class="scenario-card"><div class="scenario-badge">⚖️</div><div><div class="scenario-card-title">균형 배분</div><div class="scenario-card-desc">모든 항목을 비교적 고르게 배분하여 극단적 위험 구역을 줄이는 안정형 전략입니다.</div></div></div>
-    <div class="scenario-card" style="border-color:#d8b4fe;background:#faf5ff;"><div class="scenario-badge" style="background:#f3e8ff;">⭐</div><div><div class="scenario-card-title">선순환 최적</div><div class="scenario-card-desc">예산 만족도와 에너지 자립률을 동시에 높이는 최적화된 정책 조합입니다.</div></div></div>
-</div>
-        """, unsafe_allow_html=True)
-
-    st.markdown('<br>', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown("""
-<div class="mini-card"><div class="icon">👥</div><div class="title">시민 유형 기반</div><div class="desc">근로자, 학생, 돌봄담당자, 실업자, 노인 등 시민 유형별로 중요하게 여기는 도시 니즈가 다르게 설정됩니다.</div></div>
-        """, unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-<div class="mini-card"><div class="icon">🏘️</div><div class="title">구역별 차이 반영</div><div class="desc">산업단지, 대학가, 복지타운, 신도시, 구도심의 시민 구성이 달라 같은 정책도 다른 결과를 만듭니다.</div></div>
-        """, unsafe_allow_html=True)
-    with c3:
-        st.markdown("""
-<div class="mini-card"><div class="icon">🔁</div><div class="title">에너지-예산 선순환</div><div class="desc">에너지 자립률이 높아지면 절감액이 발생하고, 일부가 복지·교육 예산으로 환원되는 구조를 반영합니다.</div></div>
-        """, unsafe_allow_html=True)
-
-    st.markdown('<br>', unsafe_allow_html=True)
-    col_a, col_b = st.columns([1, 1])
-    with col_a:
-        st.markdown("""
-<div class="info-card">
-    <h3>📚 데이터·근거 출처</h3>
-    <div class="source-card"><div class="source-title">IMD Smart City Index 2024/2026</div><div class="source-desc">시민 만족도를 건강·안전, 모빌리티, 활동·문화, 기회·교육, 거버넌스 등 니즈 구조로 해석하는 기준으로 활용했습니다.</div></div>
-    <div class="source-card"><div class="source-title">세종시 로렌하우스</div><div class="source-desc">에너지 자립률 목표값 83.13%를 시뮬레이션의 기준선으로 사용했습니다.</div></div>
-    <div class="source-card"><div class="source-title">부산 에코델타 스마트빌리지</div><div class="source-desc">태양광, 수소, ESS 등 에너지원 조합 사례를 참고했습니다.</div></div>
-    <div class="source-card"><div class="source-title">Shin et al. (2025), J.Policy Stud.</div><div class="source-desc">공급자 중심 스마트시티 정책의 한계와 시민 체감 중심 접근의 필요성을 설명하는 근거로 사용했습니다.</div></div>
-</div>
-        """, unsafe_allow_html=True)
-    with col_b:
-        st.markdown("""
-<div class="info-card">
-    <h3>✅ 평가 기준</h3>
-    <div class="check-card">✅ 시나리오 변화폭이 5점 이상 나타나는가?</div>
-    <div class="check-card">✅ 에너지와 예산의 선순환 구조가 작동하는가?</div>
-    <div class="check-card">✅ 특정 구역이 소외되는 트레이드오프가 드러나는가?</div>
-    <div class="check-card">✅ 선순환 최적 시나리오가 높은 평균 만족도를 보이는가?</div>
-    <div class="check-card">✅ OOP 구조가 클래스 상속, 다형성, 예외처리를 충분히 보여주는가?</div>
-</div>
-        """, unsafe_allow_html=True)
-        st.markdown('<br>', unsafe_allow_html=True)
-        st.markdown("""
-<div class="info-card">
-    <h3>👩‍💻 프로젝트 정보</h3>
-    <p>
-        <b>학교</b> 한국외국어대학교<br>
-        <b>전공</b> Social Science & AI융합학부<br>
-        <b>과목</b> 객체지향형 프로그래밍<br>
-        <b>핵심 주제</b> 스마트시티 자원 배분과 시민 만족도 시뮬레이션
-    </p>
-</div>
-        """, unsafe_allow_html=True)
