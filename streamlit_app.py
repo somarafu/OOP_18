@@ -877,7 +877,7 @@ def chart_nonlinear_curve():
             marker=dict(size=8, color=COLORS['text'], symbol='circle'),
             text=[f'  {rx*100:.0f}%→{ry:.0f}pt'],
             textposition='middle right',
-            textfont=dict(size=10, color=COLORS['muted']),
+            textfont=dict(size=11, color=COLORS['text']),
             showlegend=False,
             hoverinfo='skip',
         ))
@@ -888,23 +888,23 @@ def chart_nonlinear_curve():
         line_color=COLORS['red'],
         line_width=1.5,
         annotation_text='임계점(20%)',
-        annotation_font_color=COLORS['red'],
-        annotation_font_size=10
+        annotation_font_color=COLORS['text'],
+        annotation_font_size=12
     )
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='비선형 변환 함수 — 임계점 효과', font=dict(size=14)),
+        title=dict(text='비선형 변환 함수 — 임계점 효과', font=dict(size=14, color=COLORS['text'])),
         xaxis=dict(
-            title='예산 비율 (%)',
-            gridcolor=COLORS['border'],
-            tickfont=dict(color=COLORS['muted'])
+            title=dict(text='예산 비율 (%)', font=dict(color=COLORS['text'])),
+            tickfont=dict(color=COLORS['text']),
+            gridcolor=COLORS['border']
         ),
         yaxis=dict(
-            title='니즈 충족도 점수',
+            title=dict(text='니즈 충족도 점수', font=dict(color=COLORS['text'])),
+            tickfont=dict(color=COLORS['text']),
             range=[0,105],
-            gridcolor=COLORS['border'],
-            tickfont=dict(color=COLORS['muted'])
+            gridcolor=COLORS['border']
         ),
         height=280,
         showlegend=False,
@@ -944,26 +944,29 @@ def chart_scenario_compare(results_dict):
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='시나리오별 비교 — 만족도 & 에너지 자립률', font=dict(size=14)),
+        title=dict(text='시나리오별 비교 — 만족도 & 에너지 자립률', font=dict(size=14, color=COLORS['text'])),
         height=320,
         xaxis=dict(
             tickfont=dict(size=11, color=COLORS['text']),
+            title=dict(font=dict(color=COLORS['text'])),
             gridcolor=COLORS['border']
         ),
     )
 
     fig.update_yaxes(
         title_text='도시 평균 만족도',
+        title_font=dict(color=COLORS['text']),
+        tickfont=dict(color=COLORS['text']),
         range=[40,85],
         gridcolor=COLORS['border'],
-        tickfont=dict(color=COLORS['muted']),
         secondary_y=False
     )
 
     fig.update_yaxes(
         title_text='에너지 자립률 (%)',
+        title_font=dict(color=COLORS['text']),
+        tickfont=dict(color=COLORS['text']),
         range=[0,100],
-        tickfont=dict(color=COLORS['muted']),
         secondary_y=True
     )
 
@@ -989,17 +992,26 @@ def chart_district_heatmap(results_dict):
         zmax=80,
         text=[[f'{v:.1f}' for v in row] for row in z],
         texttemplate='%{text}',
-        textfont=dict(size=11),
+        textfont=dict(size=11, color='black'),
         hovertemplate='시나리오: %{y}<br>구역: %{x}<br>만족도: %{z:.1f}점<extra></extra>',
-        colorbar=dict(title='점수', tickfont=dict(color=COLORS['muted'])),
+        colorbar=dict(
+            title=dict(text='점수', font=dict(color=COLORS['text'])),
+            tickfont=dict(color=COLORS['text'])
+        ),
     ))
 
     fig.update_layout(
         **PLOT_LAYOUT,
-        title=dict(text='구역별 만족도 히트맵 (시나리오 전체)', font=dict(size=14)),
+        title=dict(text='구역별 만족도 히트맵 (시나리오 전체)', font=dict(size=14, color=COLORS['text'])),
         height=320,
-        xaxis=dict(tickfont=dict(size=11, color=COLORS['text'])),
-        yaxis=dict(tickfont=dict(size=11, color=COLORS['text'])),
+        xaxis=dict(
+            tickfont=dict(size=11, color=COLORS['text']),
+            title=dict(font=dict(color=COLORS['text']))
+        ),
+        yaxis=dict(
+            tickfont=dict(size=11, color=COLORS['text']),
+            title=dict(font=dict(color=COLORS['text']))
+        ),
     )
 
     return fig
@@ -1547,10 +1559,10 @@ with tab3:
         )
 
         for rx, label in [
-            (0.40, '40%\n불안정 구간'),
-            (0.60, '60%\n안정 구간'),
-            (0.80, '80%\n자립 달성'),
-            (0.8313, '83.13%\n세종시 목표')
+            (0.40, '40% 불안정 구간'),
+            (0.60, '60% 안정 구간'),
+            (0.80, '80% 자립 달성'),
+            (0.8313, '83.13% 세종시 목표')
         ]:
             fig_e.add_vline(
                 x=rx*100,
@@ -1558,22 +1570,22 @@ with tab3:
                 line_color=COLORS['muted'],
                 line_width=1,
                 annotation_text=label,
-                annotation_font_color=COLORS['muted'],
-                annotation_font_size=9
+                annotation_font_color=COLORS['text'],
+                annotation_font_size=11
             )
 
         fig_e.update_layout(
             **PLOT_LAYOUT,
-            title=dict(text='에너지 자립률 → 만족도 보정 함수', font=dict(size=14)),
+            title=dict(text='에너지 자립률 → 만족도 보정 함수', font=dict(size=14, color=COLORS['text'])),
             xaxis=dict(
-                title='에너지 자립률 (%)',
-                gridcolor=COLORS['border'],
-                tickfont=dict(color=COLORS['muted'])
+                title=dict(text='에너지 자립률 (%)', font=dict(color=COLORS['text'])),
+                tickfont=dict(color=COLORS['text']),
+                gridcolor=COLORS['border']
             ),
             yaxis=dict(
-                title='보정값 (점)',
-                gridcolor=COLORS['border'],
-                tickfont=dict(color=COLORS['muted'])
+                title=dict(text='보정값 (점)', font=dict(color=COLORS['text'])),
+                tickfont=dict(color=COLORS['text']),
+                gridcolor=COLORS['border']
             ),
             height=280,
             showlegend=False,
