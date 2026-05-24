@@ -193,6 +193,7 @@ DISTRICT_NAMES = [
     'D구역\n(신도시)',
     'E구역\n(구도심)',
 ]
+
 DISTRICT_KEYS = [
     'A구역(산업단지)',
     'B구역(대학가)',
@@ -852,6 +853,16 @@ with st.sidebar:
 
     preset = PRESETS[preset_choice]
 
+    # 프리셋이 바뀌면 slider key도 바뀌도록 설정
+    # 그래야 프리셋 선택 시 예산/에너지 슬라이더 값이 실제로 바뀐다.
+    preset_key = (
+        preset_choice
+        .replace(" ", "_")
+        .replace("(", "")
+        .replace(")", "")
+        .replace("⭐", "star")
+    )
+
     def pv(key, default):
         return preset[key] if preset else default
 
@@ -863,11 +874,50 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    welfare       = st.slider('복지',          0, 100, pv('welfare', 20),        1, key='w')
-    education     = st.slider('교육',          0, 100, pv('education', 18),      1, key='e')
-    energy_infra  = st.slider('에너지 인프라', 0, 100, pv('energy_infra', 30),   1, key='ei')
-    general_infra = st.slider('일반 인프라',   0, 100, pv('general_infra', 22),  1, key='gi')
-    safety        = st.slider('안전',          0, 100, pv('safety', 10),         1, key='s')
+    welfare = st.slider(
+        '복지',
+        0,
+        100,
+        pv('welfare', 20),
+        1,
+        key=f'w_{preset_key}'
+    )
+
+    education = st.slider(
+        '교육',
+        0,
+        100,
+        pv('education', 18),
+        1,
+        key=f'e_{preset_key}'
+    )
+
+    energy_infra = st.slider(
+        '에너지 인프라',
+        0,
+        100,
+        pv('energy_infra', 30),
+        1,
+        key=f'ei_{preset_key}'
+    )
+
+    general_infra = st.slider(
+        '일반 인프라',
+        0,
+        100,
+        pv('general_infra', 22),
+        1,
+        key=f'gi_{preset_key}'
+    )
+
+    safety = st.slider(
+        '안전',
+        0,
+        100,
+        pv('safety', 10),
+        1,
+        key=f's_{preset_key}'
+    )
 
     budget_total = welfare + education + energy_infra + general_infra + safety
     budget_ok = budget_total == 100
@@ -904,10 +954,41 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    solar    = st.slider('태양광',       0, 100, pv('solar', 40),     1, key='sol')
-    hydrogen = st.slider('수소연료전지', 0, 100, pv('hydrogen', 35),  1, key='hyd')
-    ess      = st.slider('ESS',          0, 100, pv('ess', 20),       1, key='ess')
-    external = st.slider('외부전력망',   0, 100, pv('external', 5),   1, key='ext')
+    solar = st.slider(
+        '태양광',
+        0,
+        100,
+        pv('solar', 40),
+        1,
+        key=f'sol_{preset_key}'
+    )
+
+    hydrogen = st.slider(
+        '수소연료전지',
+        0,
+        100,
+        pv('hydrogen', 35),
+        1,
+        key=f'hyd_{preset_key}'
+    )
+
+    ess = st.slider(
+        'ESS',
+        0,
+        100,
+        pv('ess', 20),
+        1,
+        key=f'ess_{preset_key}'
+    )
+
+    external = st.slider(
+        '외부전력망',
+        0,
+        100,
+        pv('external', 5),
+        1,
+        key=f'ext_{preset_key}'
+    )
 
     energy_total = solar + hydrogen + ess + external
     energy_ok = energy_total == 100
@@ -1016,7 +1097,7 @@ st.markdown(
     '🏙️ NOVA시 스마트시티 자원 배분 시뮬레이터</h1>'
     '<p style="color:#7d8590;font-size:14px;margin-top:0">'
     '"기술이 아니라 배분이 도시의 수준을 결정한다"  ·  '
-    'Social Science & AI융합학부 OOP 프로젝트</p>',
+    'Social Science & AI 융합학부 OOP 프로젝트</p>',
     unsafe_allow_html=True
 )
 
@@ -1036,7 +1117,7 @@ if st.session_state.result is None:
         시뮬레이션을 시작하세요
     </div>
     <div style="font-size:14px;color:#656d76;line-height:1.8">
-        왼쪽 패널에서 예산과 에너지 배분 비율을 설정하고<br>
+        왼쪽 패널에서 프리셋 시나리오를 선택하거나 예산과 에너지 배분 비율을 직접 설정하고<br>
         <b style="color:#0969da">▶ 시뮬레이션 실행</b> 버튼을 누르면<br>
         NOVA시 5개 구역의 시민 만족도가 실시간으로 산출됩니다.
     </div>
@@ -1486,6 +1567,6 @@ Index 2026 보고서는 기술보다 거버넌스와 배분이 도시 수준을 
 - ✅ 선순환 최적이 최고 평균
 
 ### 팀 정보
-- **한국외국어대학교** Social Science & AI융합학부
+- **한국외국어대학교** Social Science & AI 융합학부
 - **과목** 객체지향형 프로그래밍
         """)
