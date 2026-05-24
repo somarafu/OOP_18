@@ -40,24 +40,20 @@ st.set_page_config(
 # ──────────────────────────────────────────────────
 st.markdown("""
 <style>
-/* 전체 배경 */
 .stApp { background-color: #ffffff; color: #1f2328; }
 
-/* 사이드바 */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #f6f8fa 0%, #ffffff 100%);
     border-right: 1px solid #d0d7de;
 }
 [data-testid="stSidebar"] .stSlider > div { color: #1f2328; }
 
-/* 사이드바 글씨 선명하게 */
 [data-testid="stSidebar"] label,
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] span {
     color: #1f2328 !important;
 }
 
-/* 메트릭 카드 */
 .metric-card {
     background: #f6f8fa;
     border: 1px solid #d0d7de;
@@ -91,7 +87,6 @@ st.markdown("""
 .metric-blue  { color: #0969da; }
 .metric-purple{ color: #8250df; }
 
-/* 섹션 헤더 */
 .section-header {
     font-size: 13px;
     font-weight: 700;
@@ -103,7 +98,6 @@ st.markdown("""
     margin-bottom: 12px;
 }
 
-/* 경보 배너 */
 .alert-danger {
     background: rgba(207, 34, 46, 0.08);
     border: 1px solid rgba(207, 34, 46, 0.3);
@@ -135,7 +129,6 @@ st.markdown("""
     font-size: 14px;
 }
 
-/* 탭 스타일 */
 .stTabs [data-baseweb="tab-list"] {
     background: #f6f8fa;
     border-bottom: 1px solid #d0d7de;
@@ -150,6 +143,202 @@ st.markdown("""
 .stTabs [aria-selected="true"] {
     color: #1f2328 !important;
     border-bottom: 2px solid #0969da;
+}
+
+/* 프로젝트 소개 탭 전용 디자인 */
+.intro-hero {
+    background: linear-gradient(135deg, #0969da 0%, #8250df 100%);
+    border-radius: 22px;
+    padding: 34px 38px;
+    color: white;
+    margin-bottom: 24px;
+    box-shadow: 0 16px 38px rgba(9,105,218,0.20);
+}
+.intro-hero .eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 10px;
+}
+.intro-hero .title {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+.intro-hero .subtitle {
+    font-size: 16px;
+    line-height: 1.75;
+    opacity: 0.95;
+    max-width: 980px;
+}
+.intro-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.intro-pill {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+}
+
+.info-card {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 22px rgba(27,31,36,0.06);
+    height: 100%;
+}
+.info-card h3 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1f2328;
+    margin-bottom: 12px;
+}
+.info-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #57606a;
+}
+.info-card .big-quote {
+    font-size: 20px;
+    line-height: 1.65;
+    font-weight: 900;
+    color: #0969da;
+    background: #ddf4ff;
+    border-left: 5px solid #0969da;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+}
+
+.mini-card {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 16px;
+    padding: 18px 18px;
+    height: 100%;
+}
+.mini-card .icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.mini-card .title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #1f2328;
+    margin-bottom: 7px;
+}
+.mini-card .desc {
+    font-size: 13px;
+    color: #57606a;
+    line-height: 1.6;
+}
+
+.scenario-card {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.scenario-badge {
+    min-width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+}
+.scenario-card-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1f2328;
+    margin-bottom: 3px;
+}
+.scenario-card-desc {
+    font-size: 13px;
+    color: #57606a;
+    line-height: 1.55;
+}
+
+.check-card {
+    background: #f0fff4;
+    border: 1px solid #aceebb;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    color: #0f5323;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.source-card {
+    background: #fff8c5;
+    border: 1px solid #f0d66b;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+}
+.source-card .source-title {
+    font-weight: 900;
+    color: #1f2328;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.source-card .source-desc {
+    color: #57606a;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.flow-box {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 18px;
+    padding: 22px;
+    margin-top: 18px;
+}
+.flow-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+.flow-num {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0969da;
+    color: white;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flow-text {
+    font-size: 14px;
+    color: #57606a;
+    line-height: 1.6;
+}
+.flow-text b {
+    color: #1f2328;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -636,10 +825,6 @@ def chart_energy_pie(solar, hydrogen, ess, external):
 
 
 def render_allocation_bars(title, desc, items, total):
-    """
-    사이드바에서 슬라이더로 조정하는 항목들을 Streamlit 기본 컴포넌트로 시각화한다.
-    HTML을 쓰지 않아서 <div> 코드가 화면에 그대로 뜨는 문제가 없다.
-    """
     st.markdown(f"**{title}**")
     st.caption(desc)
 
@@ -661,10 +846,6 @@ def render_allocation_bars(title, desc, items, total):
 
 
 def expected_energy_self_rate(solar, hydrogen, ess, external):
-    """
-    에너지 자립률 예상값.
-    외부전력망은 자립률에 기여하지 않으므로 0으로 계산한다.
-    """
     return (solar * 0.7 + hydrogen * 0.9 + ess * 0.6 + external * 0.0) / 100
 
 
@@ -839,7 +1020,6 @@ with st.sidebar:
 
     st.markdown('---')
 
-    # 프리셋 선택
     st.markdown(
         '<div class="section-header">프리셋 시나리오</div>',
         unsafe_allow_html=True
@@ -853,8 +1033,6 @@ with st.sidebar:
 
     preset = PRESETS[preset_choice]
 
-    # 프리셋이 바뀌면 slider key도 바뀌도록 설정
-    # 그래야 프리셋 선택 시 예산/에너지 슬라이더 값이 실제로 바뀐다.
     preset_key = (
         preset_choice
         .replace(" ", "_")
@@ -868,56 +1046,16 @@ with st.sidebar:
 
     st.markdown('---')
 
-    # ── 예산 배분 ──
     st.markdown(
         '<div class="section-header">💰 예산 배분 (%)</div>',
         unsafe_allow_html=True
     )
 
-    welfare = st.slider(
-        '복지',
-        0,
-        100,
-        pv('welfare', 20),
-        1,
-        key=f'w_{preset_key}'
-    )
-
-    education = st.slider(
-        '교육',
-        0,
-        100,
-        pv('education', 18),
-        1,
-        key=f'e_{preset_key}'
-    )
-
-    energy_infra = st.slider(
-        '에너지 인프라',
-        0,
-        100,
-        pv('energy_infra', 30),
-        1,
-        key=f'ei_{preset_key}'
-    )
-
-    general_infra = st.slider(
-        '일반 인프라',
-        0,
-        100,
-        pv('general_infra', 22),
-        1,
-        key=f'gi_{preset_key}'
-    )
-
-    safety = st.slider(
-        '안전',
-        0,
-        100,
-        pv('safety', 10),
-        1,
-        key=f's_{preset_key}'
-    )
+    welfare = st.slider('복지', 0, 100, pv('welfare', 20), 1, key=f'w_{preset_key}')
+    education = st.slider('교육', 0, 100, pv('education', 18), 1, key=f'e_{preset_key}')
+    energy_infra = st.slider('에너지 인프라', 0, 100, pv('energy_infra', 30), 1, key=f'ei_{preset_key}')
+    general_infra = st.slider('일반 인프라', 0, 100, pv('general_infra', 22), 1, key=f'gi_{preset_key}')
+    safety = st.slider('안전', 0, 100, pv('safety', 10), 1, key=f's_{preset_key}')
 
     budget_total = welfare + education + energy_infra + general_infra + safety
     budget_ok = budget_total == 100
@@ -948,47 +1086,15 @@ with st.sidebar:
 
     st.markdown('---')
 
-    # ── 에너지 배분 ──
     st.markdown(
         '<div class="section-header">⚡ 에너지 배분 (%)</div>',
         unsafe_allow_html=True
     )
 
-    solar = st.slider(
-        '태양광',
-        0,
-        100,
-        pv('solar', 40),
-        1,
-        key=f'sol_{preset_key}'
-    )
-
-    hydrogen = st.slider(
-        '수소연료전지',
-        0,
-        100,
-        pv('hydrogen', 35),
-        1,
-        key=f'hyd_{preset_key}'
-    )
-
-    ess = st.slider(
-        'ESS',
-        0,
-        100,
-        pv('ess', 20),
-        1,
-        key=f'ess_{preset_key}'
-    )
-
-    external = st.slider(
-        '외부전력망',
-        0,
-        100,
-        pv('external', 5),
-        1,
-        key=f'ext_{preset_key}'
-    )
+    solar = st.slider('태양광', 0, 100, pv('solar', 40), 1, key=f'sol_{preset_key}')
+    hydrogen = st.slider('수소연료전지', 0, 100, pv('hydrogen', 35), 1, key=f'hyd_{preset_key}')
+    ess = st.slider('ESS', 0, 100, pv('ess', 20), 1, key=f'ess_{preset_key}')
+    external = st.slider('외부전력망', 0, 100, pv('external', 5), 1, key=f'ext_{preset_key}')
 
     energy_total = solar + hydrogen + ess + external
     energy_ok = energy_total == 100
@@ -1522,51 +1628,200 @@ with tab3:
 # TAB 4: 프로젝트 소개
 # ════════════════════════════════════════════════
 with tab4:
-    col1, col2 = st.columns([3, 2])
+    st.markdown("""
+<div class="intro-hero">
+    <div class="eyebrow">NOVA Smart City Simulator</div>
+    <div class="title">예산과 에너지 배분이<br>시민 만족도를 어떻게 바꾸는가?</div>
+    <div class="subtitle">
+        이 프로젝트는 스마트시티를 단순한 기술 인프라의 집합이 아니라,
+        제한된 예산과 에너지를 누구에게, 어디에, 어떻게 배분하는지에 따라
+        시민의 삶이 달라지는 정책 시뮬레이션 문제로 바라봅니다.
+    </div>
+    <div class="intro-pills">
+        <div class="intro-pill">💰 예산 배분</div>
+        <div class="intro-pill">⚡ 에너지 자립률</div>
+        <div class="intro-pill">🏘️ 구역별 만족도</div>
+        <div class="intro-pill">🔁 선순환 구조</div>
+        <div class="intro-pill">⚖️ 트레이드오프</div>
+    </div>
+</div>
+    """, unsafe_allow_html=True)
 
-    with col1:
+    col_left, col_right = st.columns([1.25, 1])
+
+    with col_left:
         st.markdown("""
-### 프로젝트 배경
+<div class="info-card">
+    <h3>📌 프로젝트 문제의식</h3>
+    <p>
+        한국 정부는 제4차 스마트도시 종합계획을 추진하고 있으며,
+        세종시와 부산은 국가시범도시로 지정되어 기술 인프라 중심의 스마트시티 정책을 실험하고 있습니다.
+        하지만 실제 시민이 체감하는 도시 만족도는 단순히 기술의 많고 적음만으로 결정되지 않습니다.
+    </p>
+    <div class="big-quote">
+        “기술보다 중요한 것은<br>자원이 어디에 배분되는가이다.”
+    </div>
+    <p>
+        복지 예산을 늘리면 노인과 취약계층의 만족도는 높아질 수 있지만,
+        근로자나 학생의 기회·이동성 만족도는 상대적으로 낮아질 수 있습니다.
+        반대로 에너지 인프라에 투자하면 에너지 자립률이 오르고 절감액이 복지·교육으로 환원되는
+        선순환이 발생할 수 있습니다.
+    </p>
+</div>
+        """, unsafe_allow_html=True)
 
-한국 정부는 제4차 스마트도시 종합계획(2024-2028)을 추진 중이며, 세종시와 부산은
-국가시범도시로 지정되어 막대한 기술 인프라에 투자하고 있습니다. 그러나 IMD Smart City
-Index 2026 보고서는 기술보다 거버넌스와 배분이 도시 수준을 결정하는 더 강력한
-예측 변수임을 보여줍니다.
+        st.markdown("<br>", unsafe_allow_html=True)
 
-### 이 프로젝트의 답
-
-> **"예산과 에너지 배분의 방향이 시민의 삶을 결정한다"**
-
-복지를 늘리면 노인은 행복해지지만 근로자는 상대적으로 소외됩니다.
-에너지에 투자하면 자립률이 오르고 절감액이 복지로 환원됩니다.
-정답은 없습니다. 누구를 위한 도시인가 — 이것이 정책입니다.
-
-### 데이터 출처
-- **IMD Smart City Index 2024/2026** — 시민 만족도 5개 니즈 벡터 구조
-- **세종시 로렌하우스** — 에너지 자립률 목표값 83.13%
-- **부산 에코델타 스마트빌리지** — 에너지원 조합 사례
-- **Shin et al. (2025), J.Policy Stud.** — 공급자 중심 정책 비판 근거
-        """)
-
-    with col2:
         st.markdown("""
-### 시나리오 가이드
+<div class="flow-box">
+    <h3 style="margin-top:0;font-size:20px;font-weight:900;color:#1f2328;">🔄 시뮬레이션 흐름</h3>
+    <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-text"><b>예산 배분 입력</b><br>복지, 교육, 에너지 인프라, 일반 인프라, 안전 비율을 설정합니다.</div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-text"><b>에너지 배분 입력</b><br>태양광, 수소연료전지, ESS, 외부전력망 비율을 설정합니다.</div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-text"><b>구역별 시민 구성 반영</b><br>산업단지, 대학가, 복지타운, 신도시, 구도심의 시민 유형 차이를 반영합니다.</div>
+    </div>
+    <div class="flow-step" style="margin-bottom:0;">
+        <div class="flow-num">4</div>
+        <div class="flow-text"><b>만족도와 자립률 산출</b><br>도시 평균 만족도, 위험 구역, 에너지 자립률, 절감액 환원 효과를 계산합니다.</div>
+    </div>
+</div>
+        """, unsafe_allow_html=True)
 
-| 프리셋 | 특징 |
-|--------|------|
-| 초기 상태 | 인프라 45% 편중, B구역 위험 |
-| 복지 집중 | C구역↑ A구역 상대적↓ |
-| 에너지 집중 | 자립률 70%+ 선순환 작동 |
-| 균형 배분 | 전 구역 양호, 극적 변화 없음 |
-| 선순환 최적 ⭐ | 전체 최고 만족도 달성 |
+    with col_right:
+        st.markdown("""
+<div class="info-card">
+    <h3>🎛️ 프리셋 시나리오 가이드</h3>
+    <div class="scenario-card">
+        <div class="scenario-badge">🏗️</div>
+        <div>
+            <div class="scenario-card-title">초기 상태</div>
+            <div class="scenario-card-desc">일반 인프라와 외부전력망에 의존하는 기본 상태입니다. 특정 구역의 만족도가 낮아질 수 있습니다.</div>
+        </div>
+    </div>
+    <div class="scenario-card">
+        <div class="scenario-badge">🤝</div>
+        <div>
+            <div class="scenario-card-title">복지 집중</div>
+            <div class="scenario-card-desc">복지 예산을 크게 늘려 노인·취약계층 중심 구역의 만족도를 높이는 전략입니다.</div>
+        </div>
+    </div>
+    <div class="scenario-card">
+        <div class="scenario-badge">⚡</div>
+        <div>
+            <div class="scenario-card-title">에너지 자립 집중</div>
+            <div class="scenario-card-desc">에너지 인프라와 신재생에너지 비중을 높여 자립률과 선순환 효과를 강화합니다.</div>
+        </div>
+    </div>
+    <div class="scenario-card">
+        <div class="scenario-badge">⚖️</div>
+        <div>
+            <div class="scenario-card-title">균형 배분</div>
+            <div class="scenario-card-desc">모든 항목을 비교적 고르게 배분하여 극단적 위험 구역을 줄이는 안정형 전략입니다.</div>
+        </div>
+    </div>
+    <div class="scenario-card" style="border-color:#d8b4fe;background:#faf5ff;">
+        <div class="scenario-badge" style="background:#f3e8ff;">⭐</div>
+        <div>
+            <div class="scenario-card-title">선순환 최적</div>
+            <div class="scenario-card-desc">예산 만족도와 에너지 자립률을 동시에 높이는 최적화된 정책 조합입니다.</div>
+        </div>
+    </div>
+</div>
+        """, unsafe_allow_html=True)
 
-### 평가 기준 (검증 완료)
-- ✅ 시나리오 변화폭 ≥ 5점
-- ✅ 에너지-예산 선순환 작동
-- ✅ 트레이드오프 방향 현실 반영
-- ✅ 선순환 최적이 최고 평균
+    st.markdown("<br>", unsafe_allow_html=True)
 
-### 팀 정보
-- **한국외국어대학교** Social Science & AI 융합학부
-- **과목** 객체지향형 프로그래밍
-        """)
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("""
+<div class="mini-card">
+    <div class="icon">👥</div>
+    <div class="title">시민 유형 기반</div>
+    <div class="desc">
+        근로자, 학생, 돌봄담당자, 실업자, 노인 등 시민 유형별로 중요하게 여기는 도시 니즈가 다르게 설정됩니다.
+    </div>
+</div>
+        """, unsafe_allow_html=True)
+
+    with c2:
+        st.markdown("""
+<div class="mini-card">
+    <div class="icon">🏘️</div>
+    <div class="title">구역별 차이 반영</div>
+    <div class="desc">
+        산업단지, 대학가, 복지타운, 신도시, 구도심의 시민 구성이 달라 같은 정책도 다른 결과를 만듭니다.
+    </div>
+</div>
+        """, unsafe_allow_html=True)
+
+    with c3:
+        st.markdown("""
+<div class="mini-card">
+    <div class="icon">🔁</div>
+    <div class="title">에너지-예산 선순환</div>
+    <div class="desc">
+        에너지 자립률이 높아지면 절감액이 발생하고, 일부가 복지·교육 예산으로 환원되는 구조를 반영합니다.
+    </div>
+</div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col_a, col_b = st.columns([1, 1])
+
+    with col_a:
+        st.markdown("""
+<div class="info-card">
+    <h3>📚 데이터·근거 출처</h3>
+    <div class="source-card">
+        <div class="source-title">IMD Smart City Index 2024/2026</div>
+        <div class="source-desc">시민 만족도를 건강·안전, 모빌리티, 활동·문화, 기회·교육, 거버넌스 등 니즈 구조로 해석하는 기준으로 활용했습니다.</div>
+    </div>
+    <div class="source-card">
+        <div class="source-title">세종시 로렌하우스</div>
+        <div class="source-desc">에너지 자립률 목표값 83.13%를 시뮬레이션의 기준선으로 사용했습니다.</div>
+    </div>
+    <div class="source-card">
+        <div class="source-title">부산 에코델타 스마트빌리지</div>
+        <div class="source-desc">태양광, 수소, ESS 등 에너지원 조합 사례를 참고했습니다.</div>
+    </div>
+    <div class="source-card">
+        <div class="source-title">Shin et al. (2025), J.Policy Stud.</div>
+        <div class="source-desc">공급자 중심 스마트시티 정책의 한계와 시민 체감 중심 접근의 필요성을 설명하는 근거로 사용했습니다.</div>
+    </div>
+</div>
+        """, unsafe_allow_html=True)
+
+    with col_b:
+        st.markdown("""
+<div class="info-card">
+    <h3>✅ 평가 기준</h3>
+    <div class="check-card">✅ 시나리오 변화폭이 5점 이상 나타나는가?</div>
+    <div class="check-card">✅ 에너지와 예산의 선순환 구조가 작동하는가?</div>
+    <div class="check-card">✅ 특정 구역이 소외되는 트레이드오프가 드러나는가?</div>
+    <div class="check-card">✅ 선순환 최적 시나리오가 높은 평균 만족도를 보이는가?</div>
+    <div class="check-card">✅ OOP 구조가 클래스 상속, 다형성, 예외처리를 충분히 보여주는가?</div>
+</div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.markdown("""
+<div class="info-card">
+    <h3>👩‍💻 프로젝트 정보</h3>
+    <p>
+        <b>학교</b> 한국외국어대학교<br>
+        <b>전공</b> Social Science & AI 융합학부<br>
+        <b>과목</b> 객체지향형 프로그래밍<br>
+        <b>핵심 주제</b> 스마트시티 자원 배분과 시민 만족도 시뮬레이션
+    </p>
+</div>
+        """, unsafe_allow_html=True)
