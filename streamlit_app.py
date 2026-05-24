@@ -329,11 +329,20 @@ st.markdown("""
 # ──────────────────────────────────────────────────
 COLORS = {
     'bg': '#ffffff', 'surface': '#f6f8fa', 'border': '#d0d7de',
-    'text': '#1f2328', 'muted': '#656d76', 'blue': '#0969da',
-    'green': '#1a7f37', 'yellow': '#9a6700', 'red': '#cf222e',
-    'purple': '#8250df', 'cyan': '#1f883d',
-    'districts': ['#0969da', '#1a7f37', '#9a6700', '#8250df', '#cf222e'],
-    'scenarios': ['#0969da', '#1a7f37', '#9a6700', '#8250df', '#0550ae'],
+    'text': '#1f2328', 'muted': '#656d76',
+
+    # 시각화용 파스텔 팔레트
+    # 글씨는 PLOT_LAYOUT/CSS에서 검정 계열을 유지하고,
+    # 막대·선·파이·게이지·히트맵 등 수치 색상만 부드럽게 조정합니다.
+    'blue': '#8FB7E8',
+    'green': '#8FD0A5',
+    'yellow': '#F2D16B',
+    'red': '#F2A6A6',
+    'purple': '#BFA7E8',
+    'cyan': '#8FD8D2',
+
+    'districts': ['#8FB7E8', '#8FD0A5', '#F2D16B', '#BFA7E8', '#F2A6A6'],
+    'scenarios': ['#8FB7E8', '#8FD0A5', '#BFA7E8', '#8FD8D2', '#F2A6A6'],
 }
 
 PLOT_LAYOUT = dict(
@@ -533,7 +542,7 @@ def chart_need_radar(result, resource):
         r=need_scores + [need_scores[0]],
         theta=NEED_LABELS + [NEED_LABELS[0]],
         fill='toself',
-        fillcolor='rgba(56,139,253,0.15)',
+        fillcolor='rgba(143,183,232,0.22)',
         line=dict(color=COLORS['blue'], width=2),
         marker=dict(size=6, color=COLORS['blue']),
         name='니즈 충족도',
@@ -566,10 +575,10 @@ def chart_energy_gauge(rate):
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
             steps=[
-                dict(range=[0, 40], color='rgba(248,81,73,0.15)'),
-                dict(range=[40, 60], color='rgba(210,153,34,0.15)'),
-                dict(range=[60, 80], color='rgba(56,139,253,0.15)'),
-                dict(range=[80, 100], color='rgba(63,185,80,0.15)'),
+                dict(range=[0, 40], color='rgba(242,166,166,0.34)'),
+                dict(range=[40, 60], color='rgba(242,209,107,0.38)'),
+                dict(range=[60, 80], color='rgba(143,183,232,0.34)'),
+                dict(range=[80, 100], color='rgba(143,208,165,0.36)'),
             ],
             threshold=dict(line=dict(color=COLORS['text'], width=2), thickness=0.75, value=83.13),
         ),
@@ -643,7 +652,7 @@ def chart_nonlinear_curve():
         mode='lines',
         line=dict(color=COLORS['blue'], width=2.5),
         fill='tozeroy',
-        fillcolor='rgba(56,139,253,0.08)',
+        fillcolor='rgba(143,183,232,0.16)',
         name='충족도 곡선',
         hovertemplate='예산 %{x:.1f}% → 충족도 %{y:.1f}점<extra></extra>',
     ))
@@ -746,18 +755,18 @@ SIM_DISTRICT_INFO = {
 }
 
 SIM_BUDGET_ITEMS = {
-    'welfare': {'name': '복지', 'item': '힐링 키트', 'icon': '💗', 'object': '🏥', 'color': '#1a7f37'},
-    'education': {'name': '교육', 'item': '지식 스크롤', 'icon': '📘', 'object': '🏫', 'color': '#0969da'},
-    'energy_infra': {'name': '에너지 인프라', 'item': '스마트 배터리', 'icon': '🔋', 'object': '🔌', 'color': '#8250df'},
-    'general_infra': {'name': '일반 인프라', 'item': '도시 블록', 'icon': '🧱', 'object': '🏞️', 'color': '#d29922'},
-    'safety': {'name': '안전', 'item': '보호 방패', 'icon': '🛡️', 'object': '👮', 'color': '#cf222e'},
+    'welfare': {'name': '복지', 'item': '힐링 키트', 'icon': '💗', 'object': '🏥', 'color': '#8FD0A5'},
+    'education': {'name': '교육', 'item': '지식 스크롤', 'icon': '📘', 'object': '🏫', 'color': '#8FB7E8'},
+    'energy_infra': {'name': '에너지 인프라', 'item': '스마트 배터리', 'icon': '🔋', 'object': '🔌', 'color': '#BFA7E8'},
+    'general_infra': {'name': '일반 인프라', 'item': '도시 블록', 'icon': '🧱', 'object': '🏞️', 'color': '#F2D16B'},
+    'safety': {'name': '안전', 'item': '보호 방패', 'icon': '🛡️', 'object': '👮', 'color': '#F2A6A6'},
 }
 
 SIM_ENERGY_ITEMS = {
-    'solar': {'name': '태양광', 'icon': '☀️', 'object': '🔆', 'color': '#f59e0b'},
-    'hydrogen': {'name': '수소연료전지', 'icon': '💧', 'object': '⚗️', 'color': '#3b82f6'},
-    'ess': {'name': 'ESS', 'icon': '🔋', 'object': '⚡', 'color': '#10b981'},
-    'external': {'name': '외부전력망', 'icon': '🗼', 'object': '🔌', 'color': '#6b7280'},
+    'solar': {'name': '태양광', 'icon': '☀️', 'object': '🔆', 'color': '#F2D16B'},
+    'hydrogen': {'name': '수소연료전지', 'icon': '💧', 'object': '⚗️', 'color': '#8FB7E8'},
+    'ess': {'name': 'ESS', 'icon': '🔋', 'object': '⚡', 'color': '#8FD0A5'},
+    'external': {'name': '외부전력망', 'icon': '🗼', 'object': '🔌', 'color': '#C7CDD6'},
 }
 
 
@@ -787,12 +796,12 @@ def sim_score_label(score):
 
 def sim_score_color(score):
     if score < 50:
-        return '#cf222e'
+        return '#E78383'
     if score < 60:
-        return '#b07a12'
+        return '#E5C45E'
     if score < 75:
-        return '#2b6de0'
-    return '#1a7f37'
+        return '#7EA8E6'
+    return '#78C894'
 
 
 def sim_score_stars(score):
@@ -1049,7 +1058,7 @@ def render_game_simulation_tab(result, welfare, education, energy_infra, general
     .sim-score-face {{ width: 42px; height: 42px; border-radius: 15px; background: #fff7ed; display: flex; align-items: center; justify-content: center; font-size: 25px; }}
     .sim-score-row {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }}
     .sim-score-state {{ font-size: 14px; font-weight: 900; }}
-    .sim-score-stars {{ font-size: 12.5px; color: #f59e0b; font-weight: 800; }}
+    .sim-score-stars {{ font-size: 12.5px; color: #E5C45E; font-weight: 800; }}
     .sim-score-bar {{ height: 9px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }}
     .sim-score-fill {{ height: 100%; border-radius: 999px; }}
     .sim-score-num {{ font-size: 31px; font-weight: 900; text-align: right; line-height: 1; }}
@@ -1452,7 +1461,7 @@ with tab4:
             mode='lines',
             line=dict(color=COLORS['yellow'], width=2.5),
             fill='tozeroy',
-            fillcolor='rgba(210,153,34,0.08)',
+            fillcolor='rgba(242,209,107,0.18)',
             hovertemplate='자립률 %{x:.1f}% → 보정 %{y:+.1f}점<extra></extra>',
         ))
         fig_e.add_hline(y=0, line_dash='dash', line_color=COLORS['muted'], line_width=1)
