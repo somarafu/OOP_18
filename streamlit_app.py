@@ -655,12 +655,12 @@ def chart_energy_gauge(rate):
         ),
     ))
 
-    fig.update_layout(
-        **PLOT_LAYOUT,
-        height=280,
-        margin=dict(l=16, r=95, t=50, b=16)
-    )
-    return fig
+    gauge_layout = {
+    **PLOT_LAYOUT,
+    'height': 280,
+    'margin': dict(l=16, r=95, t=50, b=16),
+    }
+    fig.update_layout(**gauge_layout)
 
 
 def chart_budget_pie(welfare, education, energy_infra, general_infra, safety):
