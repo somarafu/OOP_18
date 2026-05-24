@@ -308,8 +308,8 @@ st.markdown("""
 }
 
 /* Plotly SVG 텍스트 색상 보정 */
-.js-plotly-plot .plotly text,
-.js-plotly-plot .main-svg text,
+.js-plotly-plot .cartesianlayer text,
+.js-plotly-plot .polarlayer text,
 .js-plotly-plot .legend text,
 .js-plotly-plot .gtitle,
 .js-plotly-plot .xtick text,
@@ -568,7 +568,7 @@ def chart_energy_gauge(rate):
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
-        domain=dict(x=[0.03, 0.86], y=[0.0, 1.0]),
+        domain=dict(x=[0.02, 0.94], y=[0.0, 1.0]),
         number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
         delta=dict(
             reference=40,
@@ -607,7 +607,7 @@ def chart_energy_gauge(rate):
     gauge_layout = {
         **PLOT_LAYOUT,
         'height': 280,
-        'margin': dict(l=16, r=125, t=50, b=16),
+        'margin': dict(l=16, r=70, t=50, b=16),
     }
     fig.update_layout(**gauge_layout)
     return fig
