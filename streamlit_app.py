@@ -295,16 +295,13 @@ st.markdown("""
 .flow-text { font-size: 14px; color: #1f2328; line-height: 1.6; }
 .flow-text b { color: #1f2328; }
 
-/* ===== 시각화/표 글씨 가독성 보정: 검정색 고정 ===== */
-[data-testid="stDataFrame"],
-[data-testid="stDataFrame"] *,
-[data-testid="stTable"],
-[data-testid="stTable"] *,
-[data-testid="stMetric"],
-[data-testid="stMetric"] *,
-[data-testid="stMarkdownContainer"],
-[data-testid="stMarkdownContainer"] table,
-[data-testid="stMarkdownContainer"] table * {
+/* 표 헤더 배경/글씨 색상 조정 */
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] [role="columnheader"] *,
+[data-testid="stDataFrame"] thead,
+[data-testid="stDataFrame"] thead *,
+[data-testid="stDataFrame"] th,
+[data-testid="stDataFrame"] th * {
     background-color: #1f2328 !important;
     color: #ffffff !important;
     fill: #ffffff !important;
