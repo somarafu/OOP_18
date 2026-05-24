@@ -607,24 +607,33 @@ def chart_district_bar(result):
         hovertemplate='<b>%{x}</b><br>만족도: %{y:.1f}점<extra></extra>',
     ))
 
+    # 기준선은 파스텔보다 한 단계 진한 색으로 표시하여 배경·막대와 구분되도록 조정
+    danger_line_color = '#E05A5A'
+    good_line_color = '#3FA66B'
+    avg_line_color = '#7C5CFF'
+
     fig.add_hline(
         y=50,
         line_dash='dot',
-        line_color=COLORS['red'],
-        line_width=1.5,
+        line_color=danger_line_color,
+        line_width=2,
         annotation_text='위험 임계치 (50점)',
-        annotation_font_color=COLORS['red'],
-        annotation_font_size=11
+        annotation_font_color=danger_line_color,
+        annotation_font_size=13,
+        annotation_position='bottom right',
+        annotation_bgcolor='rgba(255,255,255,0.88)'
     )
 
     fig.add_hline(
         y=75,
         line_dash='dot',
-        line_color=COLORS['green'],
-        line_width=1,
+        line_color=good_line_color,
+        line_width=2,
         annotation_text='우수 기준 (75점)',
-        annotation_font_color=COLORS['green'],
-        annotation_font_size=11
+        annotation_font_color=good_line_color,
+        annotation_font_size=13,
+        annotation_position='top right',
+        annotation_bgcolor='rgba(255,255,255,0.88)'
     )
 
     avg = result['city_average']
@@ -632,12 +641,13 @@ def chart_district_bar(result):
     fig.add_hline(
         y=avg,
         line_dash='dash',
-        line_color=COLORS['purple'],
-        line_width=2,
+        line_color=avg_line_color,
+        line_width=2.5,
         annotation_text=f'도시 평균 {avg:.1f}점',
-        annotation_font_color=COLORS['purple'],
-        annotation_font_size=12,
-        annotation_position='bottom right'
+        annotation_font_color=avg_line_color,
+        annotation_font_size=13,
+        annotation_position='bottom right',
+        annotation_bgcolor='rgba(255,255,255,0.90)'
     )
 
     fig.update_layout(
@@ -696,6 +706,7 @@ def chart_need_radar(result, resource):
 
 
 def chart_energy_gauge(rate):
+    # 게이지 막대는 기존 파스텔톤을 유지하되, 숫자와 증감 표시는 검정/초록/빨강으로 선명하게 표시
     color = (
         COLORS['red'] if rate < 0.40 else
         COLORS['yellow'] if rate < 0.60 else
@@ -703,45 +714,55 @@ def chart_energy_gauge(rate):
         COLORS['green']
     )
 
+    delta_color = '#2E7D32' if rate >= 0.40 else '#D32F2F'
+
     fig = go.Figure(go.Indicator(
         mode='gauge+number+delta',
         value=rate * 100,
-        number=dict(suffix='%', font=dict(size=36, color=color)),
+        domain=dict(x=[0.03, 0.93], y=[0.0, 1.0]),
+        number=dict(suffix='%', font=dict(size=36, color=COLORS['text'])),
         delta=dict(
             reference=40,
             valueformat='.1f',
-            increasing=dict(color=COLORS['green']),
-            decreasing=dict(color=COLORS['red'])
+            font=dict(size=20, color=delta_color),
+            increasing=dict(color='#2E7D32'),
+            decreasing=dict(color='#D32F2F')
         ),
         gauge=dict(
             axis=dict(
                 range=[0, 100],
                 tickwidth=1,
                 tickcolor=COLORS['muted'],
-                tickfont=dict(color=COLORS['muted'], size=10)
+                tickfont=dict(color=COLORS['muted'], size=10),
+                tickvals=[0, 20, 40, 60, 80, 100]
             ),
             bar=dict(color=color, thickness=0.25),
             bgcolor='rgba(0,0,0,0)',
             borderwidth=0,
             steps=[
-                dict(range=[0,40],  color='rgba(248,81,73,0.15)'),
-                dict(range=[40,60], color='rgba(255,243,176,0.45)'),
-                dict(range=[60,80], color='rgba(56,139,253,0.15)'),
-                dict(range=[80,100],color='rgba(63,185,80,0.15)'),
+                dict(range=[0,40],  color='rgba(255,201,201,0.45)'),
+                dict(range=[40,60], color='rgba(255,243,176,0.55)'),
+                dict(range=[60,80], color='rgba(189,224,254,0.45)'),
+                dict(range=[80,100],color='rgba(183,228,199,0.45)'),
             ],
             threshold=dict(
-                line=dict(color=COLORS['text'], width=2),
+                line=dict(color=COLORS['text'], width=3),
                 thickness=0.75,
                 value=83.13,
             ),
         ),
         title=dict(
-            text='에너지 자립률<br><span style="font-size:11px;color:#7d8590">목표: 83.13% (세종시)</span>',
+            text='에너지 자립률<br><span style="font-size:11px;color:#4b5563">목표: 83.13% (세종시)</span>',
             font=dict(size=14, color=COLORS['text'])
         ),
     ))
 
-    fig.update_layout(**PLOT_LAYOUT, height=280)
+    # 오른쪽 100 눈금이 잘리지 않도록 우측 여백과 게이지 영역을 조정
+    fig.update_layout(
+        **PLOT_LAYOUT,
+        height=280,
+        margin=dict(l=16, r=70, t=50, b=16)
+    )
 
     return fig
 
